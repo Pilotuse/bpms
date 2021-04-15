@@ -92,7 +92,7 @@ export default {
   border: none;
 }
 
-.el-input__inner {
+.search .el-input__inner {
   border: none !important;
 }
 

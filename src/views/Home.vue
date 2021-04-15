@@ -3,12 +3,21 @@
     <el-header class="header">
       <Header />
     </el-header>
+
+    <van-notice-bar
+      color="#1890ff"
+      background="#ecf9ff"
+      mode="closeable"
+      left-icon="volume-o"
+      scrollable
+      :text="notice"
+    />
+
     <el-container class="content">
       <el-aside width="300px" class="aside">
         <Aside />
       </el-aside>
       <el-main>
-        <van-notice-bar mode="closeable" left-icon="volume-o" scrollable :text="notice" />
         <router-view />
       </el-main>
     </el-container>
@@ -19,10 +28,11 @@
 import Header from "../components/Header";
 import Aside from "../components/Aside";
 export default {
-  data(){
+  data() {
     return {
-      notice:'管理员将于2021年4月14日中午12点升级系统，请注意在此时请勿提单！ 😊'
-    }
+      notice:
+        "全省通报：因数据库宕机，导致业务无法订购成功，正在紧急恢复中，再次期间请勿提单，若系统正常，将会发送消息提醒！",
+    };
   },
   components: {
     Header,
@@ -47,18 +57,16 @@ export default {
 }
 
 .content {
-  padding-top: 20px;
-  height: calc(100% - 60px);
+  padding-top: 10px;
+  height: calc(100% - 88px);
 }
 
 .aside {
   border-right: 1px solid #f0f0f0;
 }
 
-
-.van-notice-bar__wrap,.van-notice-bar  {
-  color: #1890ff !important;
-  background: #e6f7ff !important;
+.van-notice-bar__wrap,
+.van-notice-bar {
   height: 28px !important;
 }
 </style>

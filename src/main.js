@@ -6,14 +6,15 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import './styles/iconfont.css'
 import './styles/common.css'
-import { NoticeBar } from 'vant';
+import { NoticeBar ,Tag} from 'vant';
 import 'vant/lib/index.css';
 import echarts from 'echarts'
 
 
 Vue.prototype.$echarts = echarts
-Vue.use(NoticeBar);
+Vue.use(NoticeBar,Tag);
 Vue.use(ElementUI)
+
 Vue.config.productionTip = false
 
 new Vue({
