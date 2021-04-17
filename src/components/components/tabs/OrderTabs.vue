@@ -46,9 +46,9 @@
         <!-- 业务线 -->
         <el-form-item label="业务线" prop="busiLine">
           <el-select v-model="ruleForm.busiLine">
-            <el-option label="企业视频彩铃" value="0"></el-option>
-            <el-option label="企业和多号" value="1"></el-option>
-            <el-option label="专网专线" value="2"></el-option>
+            <el-option label="企业视频彩铃" value="企业视频彩铃"></el-option>
+            <el-option label="企业和多号" value="企业和多号"></el-option>
+            <el-option label="专网专线" value="专网专线"></el-option>
           </el-select>
         </el-form-item>
 
@@ -197,24 +197,11 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
 export default {
+  props: ["orderdatas", "updateorder"],
   data() {
     return {
-      ruleForm: {
-        title: "",
-        date: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-        lading: "范鸿宇",
-        handler: "范鸿宇",
-        busiLine: "",
-        priority: "",
-        expireDate: "",
-        result: "",
-        pretreatment: "",
-        describer: "",
-        customeID: "",
-        orderNum: "",
-      },
+      ruleForm: {}, // 数据不能动
       rules: {
         title: [
           { required: true, message: "请输入工单标题", trigger: "blur" },
@@ -293,6 +280,19 @@ export default {
       this.$refs[formName].resetFields();
     },
   },
+  watch: {
+    ruleForm: {
+      deep: true,
+      handler(newValue) {
+        // 调用方法去更细父组件中的数据
+        this.$emit("updateorder", newValue);
+      },
+    },
+  },
+  created() {
+    let orderdatas = JSON.stringify(this.orderdatas);
+    this.ruleForm = JSON.parse(orderdatas);
+  },
 };
 </script>
 
@@ -300,7 +300,7 @@ export default {
 .toptips {
   margin-left: 10px;
 }
-.textarea>textarea{
+.textarea > textarea {
   resize: none;
   height: 100px;
 }

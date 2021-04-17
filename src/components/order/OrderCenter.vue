@@ -3,10 +3,11 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="工单流" name="first">
         <el-col :span="12">
-          <OrderTabs />
+          <OrderTabs :orderdatas="orderDatas" @updateorder="updateOrderDatas" />
         </el-col>
+
         <el-col :span="11" :offset="1">
-          <OrderView />
+          <OrderView :orderdatas="orderDatas" />
         </el-col>
       </el-tab-pane>
       <el-tab-pane label="工单处理" name="second">工单处理</el-tab-pane>
@@ -23,17 +24,44 @@
 
 <script>
 import OrderTabs from "../components/tabs/OrderTabs";
-import OrderView from '../components/tabs/OrderView'
+import OrderView from "../components/tabs/OrderView";
+import dayjs from "dayjs";
 export default {
   data() {
     return {
       activeName: "first",
+      orderDatas: {
+        title: "",
+        date: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        lading: "范鸿宇",
+        handler: "范鸿宇",
+        busiLine: "",
+        priority: "",
+        expireDate: "",
+        result: "",
+        pretreatment: "",
+        describer: "",
+        customeID: "",
+        orderNum: "",
+      },
     };
   },
-  methods: {},
+  methods: {
+    updateOrderDatas(ruleForm) {
+      this.orderDatas = ruleForm;
+    },
+  },
   components: {
     OrderTabs,
-    OrderView
+    OrderView,
+  },
+  watch: {
+    orderDatas: {
+      deep: true,
+      handler(value) {
+        console.log(value);
+      },
+    },
   },
 };
 </script>
