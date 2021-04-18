@@ -1,9 +1,9 @@
-
 // 工单下载战术数据配置
 export const downloadTicket = [
     {
         label: "文件类型：",
         value: "pngEn",
+        target:"fileType",
         defaults: [
             { label: "PNG图片_水印+期限二维码", value: "pngEn" },
             { label: "PDF文件_水印+期限二维码", value: "pdfEn" },
@@ -14,6 +14,7 @@ export const downloadTicket = [
     {
         label: "时间水印：",
         value: "1",
+        target:"timeWatermark",
         defaults: [
             { label: "是", value: "1", disabled: true },
             { label: "否", value: "0", disabled: true },
@@ -22,6 +23,7 @@ export const downloadTicket = [
     {
         label: "工号水印：",
         value: "1",
+        target:"jobWatermark",
         defaults: [
             { label: "是", value: "1", disabled: true },
             { label: "否", value: "0", disabled: true },

@@ -20,18 +20,22 @@
         </el-tooltip>
       </div>
 
-      <el-row class="order-infos">
-        <el-col :span="6">工单标题</el-col>
-        <el-col :span="18">企业食品材料</el-col>
-      </el-row>
-      <el-row class="order-infos">
-        <el-col :span="6">ECID</el-col>
-        <el-col :span="18">2701231241231231</el-col>
-      </el-row>
-      <el-row class="order-infos">
-        <el-col :span="6"><div>订单号</div></el-col>
-        <el-col :span="18"><div>2701231241231231</div></el-col>
-      </el-row>
+      <div class="container-down" ref="orderDom">
+        <el-row class="download-order">
+          <i class="iconfont icon-gongdan png"></i>
+          工单明细表单
+        </el-row>
+        <el-row
+          class="order-infos"
+          v-for="(item, index) in showInsertValue"
+          :key="index"
+          v-show="item.value"
+          :class="index % 2 == 0 ? 'add-backgroud' : 'base-background'"
+        >
+          <el-col :span="6">{{ item.title }}</el-col>
+          <el-col :span="18">{{ item.value }}</el-col>
+        </el-row>
+      </div>
     </el-card>
 
     <el-dialog
@@ -59,10 +63,8 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-          >确 定</el-button
-        >
+        <el-button @click="handleClose">取 消</el-button>
+        <el-button type="primary" @click="handleSubmit">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -70,10 +72,10 @@
 
 
 <script>
-import { downloadTicket ,showInsertValue} from "@/config/downloadTicket"; // 工单下载数据配置
-
+import { downloadTicket, showInsertValue } from "@/config/downloadTicket"; // 工单下载数据配置
+import html2canvas from "html2canvas";
 export default {
-  props:["orderdatas"],
+  props: ["orderdatas"],
   data() {
     return {
       dialogVisible: false,
@@ -81,7 +83,7 @@ export default {
       timeWatermark: "1",
       jobWatermark: "1",
       downloadTicket,
-      showInsertValue
+      showInsertValue,
     };
   },
   methods: {
@@ -91,24 +93,74 @@ export default {
     openMsgBox() {
       this.dialogVisible = true;
     },
+    fileDownload(downloadUrl) {
+      let aLink = document.createElement("a");
+      aLink.style.display = "none";
+      aLink.href = downloadUrl;
+      aLink.download = "工单下载.png";
+      // 触发点击-然后移除
+      document.body.appendChild(aLink);
+      aLink.click();
+      document.body.removeChild(aLink);
+    },
+    handleSubmit() {
+      setTimeout(() => {
+        html2canvas(this.$refs.orderDom, {
+          backgroundColor: null,
+        }).then((canvas) => {
+          this.fileDownload(canvas.toDataURL("image/png"));
+        });
+      }, 0);
+      this.dialogVisible = false;
+    },
   },
-  watch:{
-    // orderdatas
-  }
+  watch: {
+    orderdatas: {
+      deep: true,
+      handler(value) {
+        this.showInsertValue = this.showInsertValue.map((el) => {
+          el.value = value[el.label];
+          return el;
+        });
+      },
+    },
+  },
 };
 </script>
 
 <style>
 .order-infos {
-  padding: 10px 6px;
+  padding: 10px 20px;
   font-size: 13px;
 }
 
-.order-infos:nth-child(2n) {
+.add-backgroud {
   background: #f8f8f8;
+}
+
+.base-background {
+  background: #fff;
+}
+
+.font-color {
+  color: #fff;
+}
+
+.container-down {
+  box-shadow: 0 0 12px -2px #ccc;
+}
+
+.download-order {
+  padding: 10px 20px;
+  background: #409eff;
+  color: #fff;
 }
 
 .dialog .el-select {
   width: 81%;
+}
+
+.png {
+  font-size: 18px ;
 }
 </style>

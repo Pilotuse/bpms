@@ -90,10 +90,10 @@
         <!-- 优先级 -->
         <el-form-item label="优先级" prop="priority">
           <el-select v-model="ruleForm.priority">
-            <el-option label="加急" value="0"></el-option>
-            <el-option label="高" value="1"></el-option>
-            <el-option label="中" value="2"></el-option>
-            <el-option label="低" value="3"></el-option>
+            <el-option label="加急" value="加急"></el-option>
+            <el-option label="高" value="高"></el-option>
+            <el-option label="中" value="中"></el-option>
+            <el-option label="低" value="低"></el-option>
           </el-select>
           <el-tooltip
             class="item"
@@ -121,8 +121,8 @@
         <el-form-item label="结果通知" prop="result">
           <el-checkbox-group v-model="ruleForm.type">
             <el-select v-model="ruleForm.result">
-              <el-option label="是" value="0"></el-option>
-              <el-option label="否" value="1"></el-option>
+              <el-option label="是" value="是"></el-option>
+              <el-option label="否" value="否"></el-option>
             </el-select>
 
             <el-tooltip
@@ -140,8 +140,8 @@
         <el-form-item label="HA预处理" prop="pretreatment">
           <el-checkbox-group v-model="ruleForm.type">
             <el-select v-model="ruleForm.pretreatment">
-              <el-option label="是" value="0"></el-option>
-              <el-option label="否" value="1"></el-option>
+              <el-option label="是" value="是"></el-option>
+              <el-option label="否" value="否"></el-option>
             </el-select>
 
             <el-tooltip
@@ -292,7 +292,7 @@ export default {
   created() {
     let orderdatas = JSON.stringify(this.orderdatas);
     this.ruleForm = JSON.parse(orderdatas);
-  },
+  }
 };
 </script>
 

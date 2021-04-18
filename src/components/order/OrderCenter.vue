@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName">
       <el-tab-pane label="工单流" name="first">
         <el-col :span="12">
           <OrderTabs :orderdatas="orderDatas" @updateorder="updateOrderDatas" />
@@ -54,14 +54,6 @@ export default {
   components: {
     OrderTabs,
     OrderView,
-  },
-  watch: {
-    orderDatas: {
-      deep: true,
-      handler(value) {
-        console.log(value);
-      },
-    },
-  },
+  }
 };
 </script>
