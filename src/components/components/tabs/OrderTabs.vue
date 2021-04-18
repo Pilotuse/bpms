@@ -7,6 +7,7 @@
           style="float: right; padding: 3px 0"
           type="text"
           class="el-icon-takeaway-box"
+          @click="saveOrder"
         >
           暂存工单
         </el-button>
@@ -19,6 +20,13 @@
         label-width="100px"
         class="demo-ruleForm"
       >
+        <!-- 提单时间 -->
+        <el-form-item label="BPMSID" prop="bpmsid">
+          <el-tag size="small" type="#e6f7ff">
+            {{ ruleForm.bpmsid }}
+          </el-tag>
+        </el-form-item>
+
         <!-- 工单标题 -->
         <el-form-item label="工单标题" prop="title">
           <el-input
@@ -279,12 +287,15 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
+    // 调用接口存临时工单草稿箱
+    saveOrder(){
+      console.log(JSON.stringify(this.ruleForm));
+    }
   },
   watch: {
     ruleForm: {
       deep: true,
       handler(newValue) {
-        // 调用方法去更细父组件中的数据
         this.$emit("updateorder", newValue);
       },
     },
@@ -292,7 +303,7 @@ export default {
   created() {
     let orderdatas = JSON.stringify(this.orderdatas);
     this.ruleForm = JSON.parse(orderdatas);
-  }
+  },
 };
 </script>
 

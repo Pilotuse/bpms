@@ -10,7 +10,9 @@
           <OrderView :orderdatas="orderDatas" />
         </el-col>
       </el-tab-pane>
-      <el-tab-pane label="工单处理" name="second">工单处理</el-tab-pane>
+      <el-tab-pane label="工单处理" name="second">
+          <!-- <OrderSubmit/> -->
+      </el-tab-pane>
       <el-tab-pane label="加急待办" name="third">加急待办</el-tab-pane>
 
       <el-tab-pane label="工单列表" name="fourth">工单查看</el-tab-pane>
@@ -31,6 +33,7 @@ export default {
     return {
       activeName: "first",
       orderDatas: {
+        bpmsid: "270" + new Date().getTime(),
         title: "",
         date: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss"),
         lading: "范鸿宇",
@@ -54,6 +57,7 @@ export default {
   components: {
     OrderTabs,
     OrderView,
-  }
+    // OrderSubmit:() => import('../components/tabs/OrderSubmit')
+  },
 };
 </script>

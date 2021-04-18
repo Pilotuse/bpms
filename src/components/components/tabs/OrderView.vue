@@ -20,7 +20,7 @@
         </el-tooltip>
       </div>
 
-      <div class="container-down" ref="orderDom">
+      <div class="container-down" ref="orderDom" id="pdfCentent">
         <el-row class="download-order">
           <i class="iconfont icon-gongdan png"></i>
           工单明细表单
@@ -73,7 +73,7 @@
 
 <script>
 import { downloadTicket, showInsertValue } from "@/config/downloadTicket"; // 工单下载数据配置
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas"
 export default {
   props: ["orderdatas"],
   data() {
@@ -96,7 +96,7 @@ export default {
     fileDownload(downloadUrl) {
       let aLink = document.createElement("a");
       aLink.style.display = "none";
-      aLink.href = downloadUrl;
+      aLink.href = downloadUrl.toDataURL("image/png");
       aLink.download = "工单下载.png";
       // 触发点击-然后移除
       document.body.appendChild(aLink);
@@ -104,13 +104,45 @@ export default {
       document.body.removeChild(aLink);
     },
     handleSubmit() {
-      setTimeout(() => {
-        html2canvas(this.$refs.orderDom, {
-          backgroundColor: null,
-        }).then((canvas) => {
-          this.fileDownload(canvas.toDataURL("image/png"));
+      const orderInfos = Object.values(this.showInsertValue)
+        .filter((el) => el.partten)
+        .map((el) => el.value)
+        .every((el) => el);
+
+      if (!orderInfos) {
+        this.$notify.error({
+          title: "订单信息无法生成",
+          message: "订单信息未完善，请在左侧新建工单完善后，再次生成！",
         });
-      }, 0);
+        this.dialogVisible = false;
+        return;
+      }
+      // 分析需要下载什么格式的文件
+      const fileType = this.downloadTicket.filter(
+        (el) => el.target == "fileType"
+      )[0].value;
+
+      switch (fileType) {
+        case "pngEn":
+          // 暂时不提供下载
+          break;
+        case "pdfEn":
+          // 暂时不提供下载
+          break;
+        case "mailPdf":
+          // 暂时不提供下载
+          break;
+        case "png":
+          // 调用方法下载
+          html2canvas(this.$refs.orderDom, {
+            backgroundColor: "#fff",
+          }).then((canvas) => this.fileDownload(canvas));
+          break;
+        case "pdf":
+          // 调用方法下载
+          this.ExportSavePdf(this.$refs.orderDom,new Date())
+          break;
+      }
       this.dialogVisible = false;
     },
   },
@@ -161,6 +193,6 @@ export default {
 }
 
 .png {
-  font-size: 18px ;
+  font-size: 18px;
 }
 </style>
