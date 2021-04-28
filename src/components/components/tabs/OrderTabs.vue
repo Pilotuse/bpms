@@ -53,12 +53,15 @@
 
         <!-- 业务线 -->
         <el-form-item label="业务线" prop="busiLine">
-          <el-select v-model="ruleForm.busiLine">
+          <!-- <el-select v-model="ruleForm.busiLine">
             <el-option label="企业视频彩铃" value="企业视频彩铃"></el-option>
             <el-option label="企业和多号" value="企业和多号"></el-option>
             <el-option label="专网专线" value="专网专线"></el-option>
-          </el-select>
+          </el-select> -->
+          <el-cascader :options="options" :show-all-levels="false"></el-cascader>
         </el-form-item>
+
+        
 
         <!-- 提单时间 -->
         <el-form-item label="提单时间" prop="date">
@@ -269,6 +272,7 @@ export default {
         ],
 
         desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
+        
       },
     };
   },

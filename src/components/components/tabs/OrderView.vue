@@ -125,11 +125,14 @@ export default {
       switch (fileType) {
         case "pngEn":
           // 暂时不提供下载
+          this.$message.warning('功能暂未开放，预计二期开放');
           break;
         case "pdfEn":
+          this.$message.warning('功能暂未开放，预计二期开放');
           // 暂时不提供下载
           break;
         case "mailPdf":
+          this.$message.warning('功能暂未开放，预计二期开放');
           // 暂时不提供下载
           break;
         case "png":
@@ -140,7 +143,7 @@ export default {
           break;
         case "pdf":
           // 调用方法下载
-          this.ExportSavePdf(this.$refs.orderDom,new Date())
+          this.ExportSavePdf('工单明细表单',new Date())
           break;
       }
       this.dialogVisible = false;
@@ -189,7 +192,7 @@ export default {
 }
 
 .dialog .el-select {
-  width: 81%;
+  width: 70%;
 }
 
 .png {

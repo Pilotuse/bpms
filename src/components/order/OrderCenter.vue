@@ -11,14 +11,13 @@
         </el-col>
       </el-tab-pane>
       <el-tab-pane label="工单处理" name="second">
-          <!-- <OrderSubmit/> -->
+        <OrderSubmit />
       </el-tab-pane>
-      <el-tab-pane label="加急待办" name="third">加急待办</el-tab-pane>
+      <el-tab-pane label="加急待办" name="third">
+        <OrderSubmit />
+      </el-tab-pane>
 
       <el-tab-pane label="工单列表" name="fourth">工单查看</el-tab-pane>
-      <el-tab-pane label="历史回溯" name="fifty" icon="el-icon-edit"
-        >工单历史</el-tab-pane
-      >
       <el-tab-pane label="暂存工单" name="sixth">攒出工单</el-tab-pane>
     </el-tabs>
   </div>
@@ -57,7 +56,7 @@ export default {
   components: {
     OrderTabs,
     OrderView,
-    // OrderSubmit:() => import('../components/tabs/OrderSubmit')
+    OrderSubmit: () => import("../components/tabs/OrderSubmit"),
   },
 };
 </script>

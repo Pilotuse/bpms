@@ -82,4 +82,7 @@ export default {
   height: 100%;
   background: #1890ff;
 }
+
+::-webkit-scrollbar { width: 0 !important }
+
 </style>
