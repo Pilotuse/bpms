@@ -7,7 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './styles/iconfont.css'
 import './styles/common.css'
 import { NoticeBar, Tag } from 'vant';
-import { Table } from 'ant-design-vue';
+import { Table, Descriptions } from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import 'vant/lib/index.css';
 import echarts from 'echarts'
@@ -18,7 +18,7 @@ Vue.use(html2pdf)
 
 Vue.prototype.$echarts = echarts
 Vue.use(NoticeBar, Tag);
-Vue.use(Table)
+Vue.use(Table, Descriptions)
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false

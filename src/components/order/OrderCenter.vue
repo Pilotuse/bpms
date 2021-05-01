@@ -10,15 +10,37 @@
           <OrderView :orderdatas="orderDatas" />
         </el-col>
       </el-tab-pane>
-      <el-tab-pane label="工单处理" name="second">
-        <OrderSubmit />
-      </el-tab-pane>
-      <el-tab-pane label="加急待办" name="third">
-        <OrderSubmit />
+      <el-tab-pane name="second">
+        <span slot="label">
+          待办工单
+          <el-badge :value="12" class="item-bage" type="primary"></el-badge>
+        </span>
+        <OrderSubmit :pagenation="true"/>
       </el-tab-pane>
 
-      <el-tab-pane label="工单列表" name="fourth">工单查看</el-tab-pane>
-      <el-tab-pane label="暂存工单" name="sixth">攒出工单</el-tab-pane>
+      <el-tab-pane name="third">
+        <span slot="label">
+          加急待办
+          <el-badge :value="2" class="item-bage"></el-badge>
+        </span>
+        <OrderSubmit :pagenation="true"/>
+      </el-tab-pane>
+
+      <el-tab-pane name="fourth">
+        <span slot="label">
+          工单列表
+          <el-badge :value="2" class="item-bage" type="primary"></el-badge>
+        </span>
+        <OrderSubmit :pagenation="true"/>
+      </el-tab-pane>
+
+      <el-tab-pane name="sixth">
+        <span slot="label">
+          暂存工单
+          <el-badge value="1" class="item-bage" type="primary"></el-badge>
+        </span>
+        <OrderSubmit :pagenation="false" />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -60,3 +82,7 @@ export default {
   },
 };
 </script>
+
+<style>
+
+</style>

@@ -58,10 +58,11 @@
             <el-option label="企业和多号" value="企业和多号"></el-option>
             <el-option label="专网专线" value="专网专线"></el-option>
           </el-select> -->
-          <el-cascader :options="options" :show-all-levels="false"></el-cascader>
+          <el-cascader
+            :options="options"
+            :show-all-levels="false"
+          ></el-cascader>
         </el-form-item>
-
-        
 
         <!-- 提单时间 -->
         <el-form-item label="提单时间" prop="date">
@@ -106,14 +107,14 @@
             <el-option label="中" value="中"></el-option>
             <el-option label="低" value="低"></el-option>
           </el-select>
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="请合理评估优先级，避免后续提单被降权"
-            placement="top"
-          >
-            <span class="iconfont icon-icon_yiwenkongxin toptips"></span>
-          </el-tooltip>
+
+          <Toptips
+              class="toptips"
+              content="请合理评估优先级，避免后续提单被降权"
+              placement="top"
+              icon="icon-gaojingkongxin"
+            />
+
         </el-form-item>
 
         <!-- 优先级 -->
@@ -136,14 +137,12 @@
               <el-option label="否" value="否"></el-option>
             </el-select>
 
-            <el-tooltip
-              class="item"
-              effect="dark"
+            <Toptips
+              class="toptips"
               content="测试功能：动态将以消息的形式通知"
               placement="top"
-            >
-              <span class="iconfont icon-icon_yiwenkongxin toptips"></span>
-            </el-tooltip>
+            />
+
           </el-checkbox-group>
         </el-form-item>
 
@@ -155,14 +154,12 @@
               <el-option label="否" value="否"></el-option>
             </el-select>
 
-            <el-tooltip
-              class="item"
-              effect="dark"
+            <Toptips
+              class="toptips"
               content="测试功能：HA是指坚果智能预处理，如果存在相同的问题单，则由坚果智能直接处理"
               placement="top"
-            >
-              <span class="iconfont icon-icon_yiwenkongxin toptips"></span>
-            </el-tooltip>
+            />
+            
           </el-checkbox-group>
         </el-form-item>
 
@@ -208,6 +205,7 @@
 </template>
 
 <script>
+import Toptips from "../../userfulComp/Toptips";
 export default {
   props: ["orderdatas", "updateorder"],
   data() {
@@ -272,7 +270,6 @@ export default {
         ],
 
         desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
-        
       },
     };
   },
@@ -292,9 +289,9 @@ export default {
       this.$refs[formName].resetFields();
     },
     // 调用接口存临时工单草稿箱
-    saveOrder(){
+    saveOrder() {
       console.log(JSON.stringify(this.ruleForm));
-    }
+    },
   },
   watch: {
     ruleForm: {
@@ -307,6 +304,9 @@ export default {
   created() {
     let orderdatas = JSON.stringify(this.orderdatas);
     this.ruleForm = JSON.parse(orderdatas);
+  },
+  components: {
+    Toptips,
   },
 };
 </script>

@@ -76,7 +76,6 @@ export default {
 }
 
 .brand .logo img {
-  margin-top: 10px;
   width: 100%;
 }
 

@@ -117,6 +117,14 @@ const routes = [
           isLogin: true
         }
       },{
+        path: 'micchart',
+        name: 'micchart',
+        component: () => import('../components/overview/Micchart.vue'),
+        meta: {
+          title:  `微聊 ${title}`,
+          isLogin: true
+        }
+      },{
         path: 'member',
         name: 'member',
         component: () => import('../components/manage/Member.vue'),
