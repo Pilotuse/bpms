@@ -1,5 +1,5 @@
 <template>
     <div>
-        高级自动化
+        <span >高级自动化</span>
     </div>
 </template>

@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-const title = '| Husk 坚果'
+const title = '- Husk 坚果'
 
 const routes = [
   {
@@ -109,14 +109,6 @@ const routes = [
           isLogin: true
         }
       },{
-        path: 'feedback',
-        name: 'feedback',
-        component: () => import('../components/service/Feedback.vue'),
-        meta: {
-          title:  `使用反馈 ${title}`,
-          isLogin: true
-        }
-      },{
         path: 'micchart',
         name: 'micchart',
         component: () => import('../components/overview/Micchart.vue'),
@@ -157,7 +149,7 @@ const routes = [
           isLogin: true
         }
       },{
-        path: 'apiTest',
+        path: 'apiTest/:id',
         name: 'apiTest',
         component: () => import('../components/interface/ApiTest'),
         meta: {
@@ -194,14 +186,6 @@ const routes = [
         component: () => import('../components/interface/Automation'),
         meta: {
           title:  `高级自动化 ${title}`,
-          isLogin: true
-        }
-      },{
-        path: 'webConf',
-        name: 'webConf',
-        component: () => import('../components/interface/WebConf'),
-        meta: {
-          title:  `界面功能管理 ${title}`,
           isLogin: true
         }
       },{

@@ -205,7 +205,7 @@
 </template>
 
 <script>
-import Toptips from "../../userfulComp/Toptips";
+import Toptips from "../../interface/ApiTest/components/Toptips";
 export default {
   props: ["orderdatas", "updateorder"],
   data() {
