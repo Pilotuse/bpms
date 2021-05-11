@@ -16,7 +16,7 @@
     <el-row>
       <el-col :span="6">
         <el-input
-          placeholder="请输入服务名称"
+          placeholder="请输入应用名称"
           suffix-icon="el-icon-search"
           v-model="input1"
         >
@@ -27,14 +27,14 @@
         offset="16"
         style="text-align: right; line-height: 40px; color: #1890ff"
       >
-        创建服务列表
+        创建应用列表
       </el-col>
     </el-row>
 
     <el-row style="margin-top: 20px">
       <el-col :span="16">
         <el-col :span="24">
-          服务列表
+          应用列表
           <Toptips
             content="无权限？点击前往柠檬数说平台申请"
             placement="top-start"
