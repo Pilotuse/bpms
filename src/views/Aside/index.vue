@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { defaultMenu } from "../config/defaultMenu";
+import { defaultMenu } from "@/config/defaultMenu";
 export default {
   data() {
     return {

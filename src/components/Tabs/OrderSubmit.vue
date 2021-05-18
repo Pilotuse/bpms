@@ -197,7 +197,7 @@
 
 
 <script>
-import Drawer from "../Drawer/Drawer";
+import Drawer from "../Drawer";
 export default {
   props: ["pagenation"],
   data() {

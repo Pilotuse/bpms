@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <img
-      src="../assets/color-gradient-spacecraft.svg"
+      src="../../assets/color-gradient-spacecraft.svg"
       class="login-background"
     />
     <div class="login-content">
@@ -35,6 +35,7 @@
           >
         </el-form-item>
       </el-form>
+      <div>登录将授权柠檬数服获取用户信息</div>
     </div>
   </div>
 </template>
@@ -65,13 +66,14 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert("submit!");
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
+      this.$refs[formName].validate(() => {
+        this.$router.history.push('/overview/city')
+        // if (valid) {
+        //   alert("submit!");
+        // } else {
+        //   console.log("error submit!!");
+        //   return false;
+        // }
       });
     },
     resetForm(formName) {

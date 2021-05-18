@@ -1,5 +1,5 @@
 const title = '- Husk 坚果'
-import Home from '../views/Home.vue'
+import Home from '../views/Home'
 export default [ {
   path: '/overview',
   name: 'overview',
@@ -8,7 +8,7 @@ export default [ {
     {
       path: 'city',
       name: 'city',
-      component: () => import('../components/overview/City.vue'),
+      component: () => import('../views/Home/Overview/City.vue'),
       meta: {
         title: `地市分析 ${title}`,
         isLogin: true
@@ -16,7 +16,7 @@ export default [ {
     },{
       path: 'business',
       name: 'business',
-      component: () => import('../components/overview/Business.vue'),
+      component: () => import('../views/Home/Overview/Business.vue'),
       meta: {
         title: `业务分析 ${title}`,
         isLogin: true
@@ -24,7 +24,7 @@ export default [ {
     },{
       path: 'mybusiness',
       name: 'mybusiness',
-      component: () => import('../components/overview/MyBusiness.vue'),
+      component: () => import('../views/Home/Overview/MyBusiness.vue'),
       meta: {
         title: `我的业务 ${title}`,
         isLogin: true
@@ -32,7 +32,7 @@ export default [ {
     },{
       path: 'orderCenter',
       name: 'orderCenter',
-      component: () => import('../components/order/OrderCenter.vue'),
+      component: () => import('../views/Home/Order/OrderCenter.vue'),
       meta: {
         title:  `工单中心 ${title}`,
         isLogin: true
@@ -40,7 +40,7 @@ export default [ {
     },{
       path: 'issueTracking',
       name: 'issueTracking',
-      component: () => import('../components/order/IssueTracking.vue'),
+      component: () => import('../views/Home/Order/IssueTracking.vue'),
       meta: {
         title:  `问题跟踪 ${title}`,
         isLogin: true
@@ -48,7 +48,7 @@ export default [ {
     },{
       path: 'assessment',
       name: 'assessment',
-      component: () => import('../components/order/Assessment.vue'),
+      component: () => import('../views/Home/Order/Assessment.vue'),
       meta: {
         title:  `考核与时效 ${title}`,
         isLogin: true
@@ -56,7 +56,7 @@ export default [ {
     },{
       path: 'online',
       name: 'online',
-      component: () => import('../components/service/Online.vue'),
+      component: () => import('../views/Home/Services/Online.vue'),
       meta: {
         title:  `智慧客服 ${title}`,
         isLogin: true
@@ -64,7 +64,7 @@ export default [ {
     },{
       path: 'directory',
       name: 'directory',
-      component: () => import('../components/service/Directory.vue'),
+      component: () => import('../views/Home/Services/Directory.vue'),
       meta: {
         title:  `号码簿 ${title}`,
         isLogin: true
@@ -72,7 +72,7 @@ export default [ {
     },{
       path: 'living',
       name: 'living',
-      component: () => import('../components/service/Living.vue'),
+      component: () => import('../views/Home/Services/Living.vue'),
       meta: {
         title:  `直播 ${title}`,
         isLogin: true
@@ -80,7 +80,7 @@ export default [ {
     },{
       path: 'complaint',
       name: 'complaint',
-      component: () => import('../components/service/Complaint.vue'),
+      component: () => import('../views/Home/Services/Complaint.vue'),
       meta: {
         title:  `投诉中心 ${title}`,
         isLogin: true
@@ -88,7 +88,7 @@ export default [ {
     },{
       path: 'document',
       name: 'document',
-      component: () => import('../components/service/Document.vue'),
+      component: () => import('../views/Home/Services/Document.vue'),
       meta: {
         title:  `文档中心 ${title}`,
         isLogin: true
@@ -96,7 +96,7 @@ export default [ {
     },{
       path: 'manual',
       name: 'manual',
-      component: () => import('../components/service/Manual.vue'),
+      component: () => import('../views/Home/Services/Manual.vue'),
       meta: {
         title:  `使用手册 ${title}`,
         isLogin: true
@@ -104,7 +104,7 @@ export default [ {
     },{
       path: 'micchart',
       name: 'micchart',
-      component: () => import('../components/overview/Micchart.vue'),
+      component: () => import('../views/Home/Overview/Micchart.vue'),
       meta: {
         title:  `微聊 ${title}`,
         isLogin: true
@@ -112,7 +112,7 @@ export default [ {
     },{
       path: 'member',
       name: 'member',
-      component: () => import('../components/manage/Member.vue'),
+      component: () => import('../views/Home/Manages/Member.vue'),
       meta: {
         title:  `成员变更 ${title}`,
         isLogin: true
@@ -120,7 +120,7 @@ export default [ {
     },{
       path: 'docConfig',
       name: 'docConfig',
-      component: () => import('../components/manage/DocConfig.vue'),
+      component: () => import('../views/Home/Manages/DocConfig.vue'),
       meta: {
         title:  `文档配置 ${title}`,
         isLogin: true
@@ -128,7 +128,7 @@ export default [ {
     },{
       path: 'broadcast',
       name: 'broadcast',
-      component: () => import('../components/manage/Broadcast.vue'),
+      component: () => import('../views/Home/Manages/Broadcast.vue'),
       meta: {
         title:  `群体广播 ${title}`,
         isLogin: true
@@ -136,7 +136,7 @@ export default [ {
     },{
       path: 'admin',
       name: 'admin',
-      component: () => import('../components/interface/Admin'),
+      component: () => import('../views/Home/Interfaces/Admin'),
       meta: {
         title:  `管理员变更 ${title}`,
         isLogin: true
@@ -144,7 +144,7 @@ export default [ {
     },{
       path: 'apiTest/:id',
       name: 'apiTest',
-      component: () => import('../components/interface/ApiTest'),
+      component: () => import('../views/Home/Interfaces/ApiTest'),
       meta: {
         title:  `接口测试 ${title}`,
         isLogin: true
@@ -152,7 +152,7 @@ export default [ {
     },{
       path: 'cityConf',
       name: 'cityConf',
-      component: () => import('../components/interface/CityConf'),
+      component: () => import('../views/Home/Interfaces/CityConf'),
       meta: {
         title:  `地市配置 ${title}`,
         isLogin: true
@@ -160,7 +160,7 @@ export default [ {
     },{
       path: 'businessLine',
       name: 'businessLine',
-      component: () => import('../components/interface/BusinessLine'),
+      component: () => import('../views/Home/Interfaces/BusinessLine'),
       meta: {
         title:  `业务线配置 ${title}`,
         isLogin: true
@@ -168,7 +168,7 @@ export default [ {
     },{
       path: 'orderParams',
       name: 'orderParams',
-      component: () => import('../components/interface/OrderParams'),
+      component: () => import('../views/Home/Interfaces/OrderParams'),
       meta: {
         title:  `工单参数配置 ${title}`,
         isLogin: true
@@ -176,7 +176,7 @@ export default [ {
     },{
       path: 'automation',
       name: 'automation',
-      component: () => import('../components/interface/Automation'),
+      component: () => import('../views/Home/Interfaces/Automation'),
       meta: {
         title:  `高级自动化 ${title}`,
         isLogin: true
@@ -184,7 +184,7 @@ export default [ {
     },{
       path: 'encryption',
       name: 'encryption',
-      component: () => import('../components/safety/Encryption'),
+      component: () => import('../views/Home/Safety/Encryption'),
       meta: {
         title:  `信息加密 ${title}`,
         isLogin: true
@@ -192,7 +192,7 @@ export default [ {
     },{
       path: 'safyTest',
       name: 'safyTest',
-      component: () => import('../components/safety/SafyTest'),
+      component: () => import('../views/Home/Safety/SafyTest'),
       meta: {
         title:  `安全测试 ${title}`,
         isLogin: true
@@ -200,15 +200,15 @@ export default [ {
     },{
       path: 'safetyKnows',
       name: 'safetyKnows',
-      component: () => import('../components/safety/SafetyKnows'),
+      component: () => import('../views/Home/Safety/SafetyKnows'),
       meta: {
         title:  `安全知识 ${title}`,
         isLogin: true
       }
     },{
-      path: 'system',
+      path: 'System',
       name: 'system',
-      component: () => import('../components/system/System'),
+      component: () => import('../views/Home/System/System'),
       meta: {
         title:  `系统概况 ${title}`,
         isLogin: true
@@ -216,7 +216,7 @@ export default [ {
     },{
       path: 'orderVolume',
       name: 'orderVolume',
-      component: () => import('../components/system/OrderVolume'),
+      component: () => import('../views/Home/System/OrderVolume'),
       meta: {
         title:  `工单交易量 ${title}`,
         isLogin: true
@@ -224,7 +224,7 @@ export default [ {
     },{
       path: 'onlineUsers',
       name: 'onlineUsers',
-      component: () => import('../components/system/OnlineUsers'),
+      component: () => import('../views/Home/System/OnlineUsers'),
       meta: {
         title:  `工单交易量 ${title}`,
         isLogin: true
@@ -232,11 +232,11 @@ export default [ {
     },{
       path: 'server',
       name: 'server',
-      component: () => import('../components/system/Server'),
+      component: () => import('../views/Home/System/Server'),
       meta: {
         title:  `服务器信息 ${title}`,
         isLogin: true
       }
     },
   ]
-},]
+}]

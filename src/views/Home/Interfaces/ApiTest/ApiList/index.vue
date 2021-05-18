@@ -55,9 +55,9 @@
 
 
 <script>
-import Toptips from "./Toptips";
-import List from "./List";
-import Collection from "./Collection";
+import Toptips from "@/components/Toptips";
+import List from "../List";
+import Collection from "../Colleaction";
 export default {
   props:["changepage"],
   components: {
@@ -75,7 +75,7 @@ export default {
   margin-top: 10px;
   margin-bottom: 20px;
   position: relative;
-  background: url("../../../../assets/api-back1.png");
+  background: url("../../../../../assets/api-back1.png");
   background-size: cover;
   width: 100%;
   height: 200px;

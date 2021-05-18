@@ -18,7 +18,7 @@ const routes = [
   {
     path: '/404',
     name: 'notfound',
-    component: () => import('../views/NotFound'),
+    component: () => import('../views/NotFound/index.vue'),
     meta: {
       title: `未找到该页面 ${title}`
     }
