@@ -26,7 +26,7 @@
       <el-card class="box-card" shadow="hover">
         <a-descriptions title="柠檬数说 Lemon API" size="small">
           <a-descriptions-item label="所属模块">
-            柠檬数说开放平台
+            柠檬数说开放平台  微服务
           </a-descriptions-item>
           <a-descriptions-item label="创建日期">
             2020-04-12
