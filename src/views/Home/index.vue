@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import Header from "../components/Header";
-import Aside from "../components/Aside";
+import Header from "../Header";
+import Aside from "../Aside";
 export default {
   data() {
     return {

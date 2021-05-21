@@ -72,7 +72,7 @@
 
 
 <script>
-import { downloadTicket, showInsertValue } from "@/config/downloadTicket"; // 工单下载数据配置
+import { downloadTicket, showInsertValue } from "../../config/downloadTicket"; // 工单下载数据配置
 import html2canvas from "html2canvas"
 export default {
   props: ["orderdatas"],

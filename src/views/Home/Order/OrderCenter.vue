@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import OrderTabs from "../components/tabs/OrderTabs";
-import OrderView from "../components/tabs/OrderView";
+import OrderTabs from "../../../components/Tabs/OrderTabs";
+import OrderView from "../../../components/Tabs/OrderView";
 import dayjs from "dayjs";
 export default {
   data() {
@@ -78,7 +78,7 @@ export default {
   components: {
     OrderTabs,
     OrderView,
-    OrderSubmit: () => import("../components/tabs/OrderSubmit"),
+    OrderSubmit: () => import("../../../components/Tabs/OrderSubmit"),
   },
 };
 </script>

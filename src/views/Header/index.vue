@@ -2,7 +2,7 @@
   <div>
     <div class="brand">
       <div class="logo">
-        <img src="../assets/logo.png" alt="" />
+        <img src="../../assets/logo.png" alt="" />
       </div>
       <span>Husk Analysis</span>
     </div>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { headerMenu } from "../config/headerMenu";
+import { headerMenu } from "../../config/headerMenu";
 export default {
   data() {
     return {

@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import apilist from "./components/ApiList";
-import apidetail from "./components/ApiDetail";
+import apilist from "./ApiList";
+import apidetail from "./ApiDetail";
 export default {
   components: {
     apilist,
