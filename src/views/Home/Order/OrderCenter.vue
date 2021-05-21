@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import OrderTabs from "../../../components/Tabs/OrderSubmit";
+import OrderTabs from "../../../components/Tabs/OrderTabs";
 import OrderView from "../../../components/Tabs/OrderView";
 import dayjs from "dayjs";
 export default {
