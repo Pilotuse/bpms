@@ -1,9 +1,5 @@
 <template>
   <div class="login-container">
-    <img
-      src="../../assets/color-gradient-spacecraft.svg"
-      class="login-background"
-    />
     <div class="login-content">
       <h1 class="login-brand">Husk Analysis</h1>
 
@@ -87,15 +83,17 @@ export default {
 .login-container {
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(-225deg, #7f8c8d, #34495e, #2c3e50);
+  background: url('../../assets/backimg.jpg');
+  background-size: cover;
+  overflow: hidden;
 }
 
 .login-content {
   padding: 30px;
   position: absolute;
-  right: 20%;
+  left: 50%;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-50%,-50%);
   width: 450px;
   height: 500px;
   background: #fff;
@@ -105,36 +103,6 @@ export default {
 .login-brand {
   margin-bottom: 50px;
   color: #34495e;
-}
-
-.login-background {
-  width: 900px;
-  position: absolute;
-  top: 14%;
-  left: 12%;
-  transform: translateY(-50%);
-  -webkit-animation: bounce 4s ease-in-out infinite;
-  animation: bounce 4s ease-in-out infinite;
-  -webkit-transition: -webkit-transform 300ms cubic-bezier(0, 0, 0.3, 1);
-  transition: -webkit-transform 300ms cubic-bezier(0, 0, 0.3, 1);
-  -o-transition: transform 300ms cubic-bezier(0, 0, 0.3, 1);
-  transition: transform 300ms cubic-bezier(0, 0, 0.3, 1);
-  transition: transform 300ms cubic-bezier(0, 0, 0.3, 1),
-    -webkit-transform 300ms cubic-bezier(0, 0, 0.3, 1);
-  will-change: transform;
-}
-
-@keyframes bounce {
-  0%,
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-
-  50% {
-    -webkit-transform: translateY(-40px);
-    transform: translateY(-40px);
-  }
 }
 
 /deep/.el-form-item {
