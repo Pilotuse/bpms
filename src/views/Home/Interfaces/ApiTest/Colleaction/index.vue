@@ -39,8 +39,8 @@ export default {
     .api-list-collection {
         position: absolute;
         top: 18px;
-        right:  18px;
-        color: #888;
+        right:  20px;
+        color: #1890ff;
         cursor: pointer;
     }
 </style>

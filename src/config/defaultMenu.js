@@ -16,7 +16,7 @@ export const defaultMenu = [
     describer: "反馈中心",
     icon: "",
     children: [
-      { id: '2-1', path: '/overview/orderCenter', describer: '工单中心', icon: 'icon-gongnengdingyi' },
+      { id: '2-1', path: '/overview/orderCenter', describer: '工单中心', icon: 'icon-gongnengdingyi', new: "true" },
       { id: '2-2', path: '/overview/issueTracking', describer: '问题跟踪', icon: 'icon-guize' },
       { id: '2-3', path: '/overview/assessment', describer: '考核与时效', icon: 'icon-tuoguan' },
     ]
@@ -29,7 +29,7 @@ export const defaultMenu = [
     children: [
       { id: '3-1', path: '/overview/online', describer: '智慧客服', icon: 'icon-kefu' },
       { id: '3-2', path: '/overview/directory', describer: '号码簿', icon: 'icon-icon_zhanghao' },
-      { id: '3-3', path: '/overview/living', describer: '直播', icon: 'icon-shexiangtou' },
+      { id: '3-3', path: '/overview/living', describer: '直播', icon: 'icon-shexiangtou',new: "true"  },
       { id: '3-4', path: '/overview/document', describer: '文档中心', icon: 'icon-DOC' },
       { id: '3-5', path: '/overview/manual', describer: '使用手册与反馈', icon: 'icon-menci' },
       { id: '3-6', path: '/overview/complaint', describer: '投诉中心', icon: 'icon-yunyingzhongxin' },
@@ -43,7 +43,7 @@ export const defaultMenu = [
     children: [
       { id: '4-1', path: '/overview/member', describer: '成员变更', icon: 'icon-hezuohuobanmiyueguanli' },
       { id: '4-2', path: '/overview/docConfig', describer: '文档配置', icon: 'icon-zidingyi' },
-      { id: '4-3', path: '/overview/broadcast', describer: '群体广播', icon: 'icon-shengyinkai' },
+      { id: '4-3', path: '/overview/broadcast', describer: '群体广播', icon: 'icon-shengyinkai' ,new:"true"},
     ]
   },
   {
@@ -53,7 +53,7 @@ export const defaultMenu = [
     icon: "",
     children: [
       { id: '5-1', path: '/overview/admin', describer: '管理员变更', icon: 'icon-shenjing1' },
-      { id: '5-2', path: '/overview/apitest/apilist', describer: '接口测试', icon: 'icon-gongyezujian-zhishideng' },
+      { id: '5-2', path: '/overview/apitest/apilist', describer: '接口测试', icon: 'icon-gongyezujian-zhishideng' ,new:"true"},
       { id: '5-3', path: '/overview/cityconf', describer: '地市配置', icon: 'icon-biaodanzujian-shurukuang' },
       { id: '5-4', path: '/overview/businessline', describer: '业务线配置', icon: 'icon-jiedianguanli' },
       { id: '5-5', path: '/overview/orderParams', describer: '工单参数配置', icon: 'icon-bianji' },

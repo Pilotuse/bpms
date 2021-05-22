@@ -6,7 +6,7 @@
       </el-col>
     </el-row>
     <el-card class="box-card" shadow="never">
-      <Notice :text="notice" :title="title" :icon="icon" />
+      <Notice :text="notice" :title="title" :icon="icon" mode="" />
     </el-card>
 
     <el-row>
@@ -16,13 +16,13 @@
     </el-row>
     <div>
       <el-card class="box-card" shadow="never">
-        <el-steps :active="3" finish-status="success" simple>
-          <el-step title="信息填写"></el-step>
+        <el-steps :active="0" finish-status="success" simple>
+          <el-step title="信息填写" icon="el-icon-loading"></el-step>
           <el-step title="广播选项"></el-step>
           <el-step title="校验(自动)"></el-step>
           <el-step title="发布审批"></el-step>
           <el-step title="确认发布"></el-step>
-          <el-step title="信息上报"></el-step>
+          <el-step title="埋点上报"></el-step>
         </el-steps>
       </el-card>
       <el-collapse v-model="activeNames" @change="handleChange">
@@ -30,6 +30,110 @@
           <template slot="title" class="collapse">
             信息填写<i class="header-icon el-icon-check"></i>
           </template>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">广播令牌</el-col>
+            <el-col :span="22"> 202105222051001</el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">签约发布人</el-col>
+            <el-col :span="22"> 范鸿宇</el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">创建时间</el-col>
+            <el-col :span="22"> 2021年5月22日21:47:15</el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">广播内容</el-col>
+            <el-col :span="22">
+              <el-input
+                type="textarea"
+                placeholder="请输入内容"
+                v-model="textarea"
+                maxlength="30"
+                show-word-limit
+              >
+              </el-input>
+            </el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">广播类型</el-col>
+            <el-col :span="22">
+              <el-select v-model="value" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">起止日期</el-col>
+            <el-col :span="22">
+              <el-date-picker
+                v-model="value1"
+                type="datetimerange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              >
+              </el-date-picker>
+            </el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">是否支持关闭</el-col>
+            <el-col :span="22">
+              <el-select v-model="value" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">优先推送</el-col>
+            <el-col :span="22">
+              <el-select v-model="value" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">广播ICON</el-col>
+            <el-col :span="22">
+              <el-select v-model="value" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-col>
+          </el-row>
+
         </el-collapse-item>
         <el-collapse-item name="2">
           <template slot="title" class="collapse">
@@ -79,5 +183,9 @@ h3 {
   margin-left: 20px;
   color: #67c23a;
   font-size: 16px;
+}
+
+.Information-filling {
+  margin-bottom: 20px;
 }
 </style>

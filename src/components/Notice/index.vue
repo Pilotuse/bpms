@@ -2,9 +2,10 @@
   <van-notice-bar
     :color="color"
     background="#ecf9ff"
-    mode="closeable"
+    :mode="mode"
     scrollable
     :text="text"
+    delay="3"
   >
     <template slot="left-icon">
       <span class="notice-title notice-error">{{ title }}</span>
@@ -32,6 +33,10 @@ export default {
     icon:{
       type:String,
       default:"iconfont icon-shengyin_shiti"
+    },
+    mode:{
+      type:String,
+      default:"closeable"
     }
   },
 };

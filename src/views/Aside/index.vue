@@ -8,6 +8,7 @@
             <router-link :to="el.path">
               <span :class="'icon iconfont ' + el.icon"></span>
               {{ el.describer }}
+              <i class="aside-new" v-if="el.new">NEW!</i>
             </router-link>
           </li>
         </ul>
@@ -47,6 +48,7 @@ export default {
 }
 
 .select-item-sons {
+  position: relative;
   margin: 2px 0;
   height: 40px;
   font-size: 14px;
@@ -83,6 +85,16 @@ export default {
   background: #1890ff;
 }
 
-::-webkit-scrollbar { width: 0 !important }
+::-webkit-scrollbar {
+  width: 0 !important;
+}
 
+.aside-new {
+  position: absolute;
+  align-items: center;
+  font-size: 12px;
+  color: #f9ca24;
+  font-weight: 600;
+  right: 10px;
+}
 </style>

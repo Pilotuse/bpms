@@ -138,8 +138,8 @@ export default {
 .list-api-num {
   position: absolute;
   right: 20px;
-  top: 12px;
-  color: #999;
+  top: 16px;
+  color: #1890ff;
   font-size: 20px;
   cursor: pointer;
 }
