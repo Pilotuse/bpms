@@ -43,7 +43,7 @@ export const defaultMenu = [
     children: [
       { id: '4-1', path: '/overview/member', describer: '成员变更', icon: 'icon-hezuohuobanmiyueguanli' },
       { id: '4-2', path: '/overview/docConfig', describer: '文档配置', icon: 'icon-zidingyi' },
-      { id: '4-3', path: '/overview/broadcast', describer: '置顶广播', icon: 'icon-shengyinkai' },
+      { id: '4-3', path: '/overview/broadcast', describer: '群体广播', icon: 'icon-shengyinkai' },
     ]
   },
   {

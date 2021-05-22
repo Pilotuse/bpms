@@ -4,14 +4,7 @@
       <Header />
     </el-header>
 
-    <van-notice-bar
-      color="#1890ff"
-      background="#ecf9ff"
-      mode="closeable"
-      left-icon="volume-o"
-      scrollable
-      :text="notice"
-    />
+    <Notice :text="notice" :color="color" :icon="icon"/>
 
     <el-container class="content">
       <el-aside width="300px" class="aside">
@@ -27,16 +20,18 @@
 <script>
 import Header from "../Header";
 import Aside from "../Aside";
+import Notice from '../../components/Notice'
 export default {
   data() {
     return {
-      notice:
-        "全省通报：因数据库宕机，导致业务无法订购成功，正在紧急恢复中，再次期间请勿提单，若系统正常，将会发送消息提醒！",
+      notice:"因数据库宕机，导致业务无法订购成功，正在紧急恢复中！",
+      color:"#f40"
     };
   },
   components: {
     Header,
     Aside,
+    Notice
   },
 };
 </script>

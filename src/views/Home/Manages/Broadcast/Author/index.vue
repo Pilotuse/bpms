@@ -1,5 +1,5 @@
 <template>
     <div>
-        群体广播
+        权限
     </div>
 </template>
