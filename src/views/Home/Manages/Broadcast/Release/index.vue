@@ -133,22 +133,101 @@
               </el-select>
             </el-col>
           </el-row>
-
         </el-collapse-item>
+
         <el-collapse-item name="2">
           <template slot="title" class="collapse">
             广播选项<i class="header-icon el-icon-loading"></i>
           </template>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">广播人群</el-col>
+            <el-col :span="22">
+              <el-select v-model="value" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+              <span class="release-add-list">
+                <Toptips
+                  content="新增广播人群"
+                  icon="el-icon-plus"
+                  placement="top"
+                />
+              </span>
+            </el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">组合推送方式</el-col>
+            <el-col :span="22">
+              <el-select v-model="value" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+
+              <span class="release-add-list">
+                <Toptips
+                  content="新增推送组合"
+                  icon="el-icon-plus"
+                  placement="top"
+                />
+              </span>
+            </el-col>
+          </el-row>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">审批完成后自动发布</el-col>
+            <el-col :span="22">
+              <el-select v-model="value" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-col>
+          </el-row>
+          
         </el-collapse-item>
         <el-collapse-item name="3">
           <template slot="title" class="collapse">
             发布审批<i class="header-icon el-icon-loading"></i>
           </template>
+
+          <el-row class="Information-filling">
+            <el-col :span="2">审批领导</el-col>
+            <el-col :span="22">
+              <el-select v-model="value" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-col>
+          </el-row>
+
+          <el-button type="primary">提交审批</el-button>
         </el-collapse-item>
         <el-collapse-item name="4">
           <template slot="title" class="collapse">
             确认发布<i class="header-icon el-icon-loading"></i>
           </template>
+          <el-button type="primary">确认发布</el-button>
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -157,6 +236,7 @@
 
 <script>
 import Notice from "@/components/Notice";
+import Toptips from "@/components/Toptips";
 export default {
   data() {
     return {
@@ -167,13 +247,27 @@ export default {
   },
   components: {
     Notice,
+    Toptips,
   },
 };
 </script>
 
 <style scoped>
 h3 {
+  position: relative;
+  padding-left: 20px;
   font-size: 22px;
+}
+
+h3::after {
+  content: "☇";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  color: #1890ff;
+  font-size: 20px;
 }
 
 .box-card {
@@ -187,5 +281,19 @@ h3 {
 
 .Information-filling {
   margin-bottom: 20px;
+}
+
+.release-add-list {
+  box-sizing: border-box;
+  margin-left: 20px;
+  display: inline-block;
+  border: 1px solid #d9d9d9;
+  color: #d9d9d9;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
 }
 </style>

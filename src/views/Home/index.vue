@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       notice:"因数据库宕机，导致业务无法订购成功，正在紧急恢复中！",
-      color:"#f40"
+      color:"#1890ff"
     };
   },
   components: {

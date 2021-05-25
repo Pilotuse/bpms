@@ -3,12 +3,16 @@
     <ul>
       <li v-for="item in defaultMenu" :key="item.id">
         <span class="select-title">{{ item.describer }}</span>
+        <!-- <span class="select-counter">{{ item.counter }}个</span> -->
         <ul>
           <li v-for="el in item.children" :key="el.id" class="select-item-sons">
             <router-link :to="el.path">
               <span :class="'icon iconfont ' + el.icon"></span>
               {{ el.describer }}
               <i class="aside-new" v-if="el.new">NEW!</i>
+              <i class="aside-offline" v-if="el.offline">
+                <span class="span-offline">OFFLINE</span>
+              </i>
             </router-link>
           </li>
         </ul>
@@ -96,5 +100,25 @@ export default {
   color: #f9ca24;
   font-weight: 600;
   right: 10px;
+}
+
+.aside-offline {
+  position: absolute;
+  align-items: center;
+  font-size: 12px;
+  color: #fff;
+  font-weight: 600;
+  right: 10px;
+}
+
+.span-offline {
+  padding: 0 4px;
+  border-radius: 4px;
+  background: #95a5a6;
+}
+
+.select-counter {
+  font-size: 12px;
+  color: #ccc;
 }
 </style>

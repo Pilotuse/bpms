@@ -1,6 +1,6 @@
 <template>
   <el-tooltip effect="dark" :content="content" :placement="placement">
-    <i :class="'iconfont ' + [icon ? icon : 'icon-icon_yiwenkongxin']"></i>
+    <i :class="[icon ? icon : 'iconfont icon-icon_yiwenkongxin']"></i>
   </el-tooltip>
 </template>
 

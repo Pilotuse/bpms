@@ -1,14 +1,16 @@
 {
   "name": "bpms",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lemon":"cd mock && json-server --port 2345 --watch db.json"
   },
   "dependencies": {
     "ant-design-vue": "^1.7.4",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.4",
     "echarts": "^5.0.2",
@@ -29,6 +31,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "json-server": "^0.16.3",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
