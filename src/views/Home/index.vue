@@ -12,6 +12,7 @@
       </el-aside>
       <el-main>
         <router-view />
+        <div id="subapp-viewport"></div>
       </el-main>
     </el-container>
   </el-container>

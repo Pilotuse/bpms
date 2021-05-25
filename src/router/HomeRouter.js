@@ -144,7 +144,6 @@ export default [ {
     },{
       path: 'apiTest/:id',
       name: 'apiTest',
-      component: () => import('../views/Home/Interfaces/ApiTest'),
       meta: {
         title:  `接口测试 ${title}`,
         isLogin: true
