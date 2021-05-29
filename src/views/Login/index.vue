@@ -1,37 +1,62 @@
 <template>
   <div class="login-container">
-    <div class="login-content">
-      <h1 class="login-brand">Husk Analysis</h1>
+    <div class="header">
+      <div class="header-context">
+        <div class="brand">
+          <img src="@/assets/bpms_logo.png" alt="" />
+          花生金库
+        </div>
+        <ul class="navbar">
+          <li>账号金库</li>
+          <li>权限金库</li>
+          <li>审计中心</li>
+          <li>申请记录</li>
+          <li>日志流水</li>
+          <li>管理入口</li>
+        </ul>
+      </div>
+    </div>
+    <div class="contents">
+      <div class="login-context">
+        <div class="describer">
+          <div class="target">
+            <img src="@/assets/bpms_logo.png" alt="" />
+            花生金库
+            <i class="iconfont icon-guanbi1"></i>
+            <img src="../../assets/logo.png" alt="" />
+            坚果分析
+          </div>
+          <div class="options"></div>
+        </div>
 
-      <el-form
-        :model="ruleForm"
-        status-icon
-        :rules="rules"
-        ref="ruleForm"
-        label-width="100px"
-        class="demo-ruleForm"
-      >
-        <el-form-item label="用户名" prop="username">
-          <el-input
-            type="text"
-            v-model="ruleForm.username"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input
-            type="password"
-            v-model="ruleForm.password"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')"
-            >立即登录</el-button
-          >
-        </el-form-item>
-      </el-form>
-      <div>登录将授权柠檬数服获取用户信息</div>
+        <el-form
+          :model="ruleForm"
+          status-icon
+          :rules="rules"
+          ref="ruleForm"
+          class="demo-ruleForm"
+        >
+          <el-form-item prop="username">
+            <el-input
+              type="text"
+              v-model="ruleForm.username"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input
+              type="password"
+              v-model="ruleForm.password"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')"
+              >立即登录</el-button
+            >
+          </el-form-item>
+        </el-form>
+      </div>
     </div>
   </div>
 </template>
@@ -63,7 +88,7 @@ export default {
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(() => {
-        this.$router.history.push('/overview/city')
+        this.$router.history.push("/overview/city");
         // if (valid) {
         //   alert("submit!");
         // } else {
@@ -80,24 +105,70 @@ export default {
 </script>
 
 <style scoped>
+@font-face {
+  font-family: "webfont";
+  font-display: swap;
+  src: url("//at.alicdn.com/t/webfont_5iu6m6fb7v8.eot"); /* IE9*/
+  src: url("//at.alicdn.com/t/webfont_5iu6m6fb7v8.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("//at.alicdn.com/t/webfont_5iu6m6fb7v8.woff2")
+      format("woff2"),
+    url("//at.alicdn.com/t/webfont_5iu6m6fb7v8.woff") format("woff"),
+    /* chrome、firefox */ url("//at.alicdn.com/t/webfont_5iu6m6fb7v8.ttf")
+      format("truetype"),
+    /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+      url("//at.alicdn.com/t/webfont_5iu6m6fb7v8.svg#站酷小薇体") format("svg"); /* iOS 4.1- */
+}
+
+.header {
+  position: relative;
+  padding: 0 60px;
+  line-height: 80px;
+  height: 80px;
+  box-shadow: 0 0 12px -7px #bdc3c7;
+}
+
+.header .brand {
+  line-height: 80px;
+  height: 80px;
+  font-size: 30px;
+  font-family: "webfont";
+}
+
+.brand img {
+  width: 40px;
+  vertical-align: sub;
+}
+
+.navbar {
+  display: flex;
+  padding: 0 40px;
+}
+
+.navbar li {
+  padding: 0 20px;
+}
+
 .login-container {
   width: 100%;
   height: 100vh;
-  background: url('../../assets/backimg.jpg');
-  background-size: cover;
   overflow: hidden;
 }
 
-.login-content {
-  padding: 30px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  width: 450px;
+.contents {
+  display: flex;
+  justify-content: center;
+  padding-top: 240px;
+  height: 100%;
+  background: #fcfcfc;
+}
+
+.login-context {
+  padding: 20px;
+  width: 360px;
   height: 500px;
   background: #fff;
-  border-radius: 6px;
+  box-shadow: 0 0 12px -7px #bdc3c7;
 }
 
 .login-brand {
@@ -109,19 +180,27 @@ export default {
   margin-bottom: 40px;
 }
 
-/deep/.el-input {
-  width: 90%;
-}
-
 /deep/.el-form-item__label {
   font-size: 16px;
 }
 
 /deep/.el-button--primary {
   margin-top: 10px;
-  background: #34495e;
   border: none;
-  width: 50%;
-  height: 44px;
+  width: 100%;
+}
+
+.describer img {
+  width: 36px;
+}
+
+.describer img:first-child {
+  width: 30px;
+}
+
+.options {
+  font-size: 24px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 </style>
