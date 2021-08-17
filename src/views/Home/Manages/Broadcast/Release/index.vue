@@ -19,7 +19,7 @@
         <el-steps :active="0" finish-status="success" simple>
           <el-step title="信息填写" icon="el-icon-loading"></el-step>
           <el-step title="广播选项"></el-step>
-          <el-step title="校验(自动)"></el-step>
+          <el-step title="自动校验"></el-step>
           <el-step title="发布审批"></el-step>
           <el-step title="确认发布"></el-step>
           <el-step title="埋点上报"></el-step>
@@ -64,13 +64,16 @@
             <el-col :span="2">广播类型</el-col>
             <el-col :span="22">
               <el-select v-model="value" placeholder="请选择">
-                <el-option
+                <!-- <el-option
                   v-for="item in options"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
                 >
-                </el-option>
+                </el-option> -->
+                <el-option value="通知"></el-option>
+                <el-option value="紧急通知"></el-option>
+                <el-option value="故障"></el-option>
               </el-select>
             </el-col>
           </el-row>

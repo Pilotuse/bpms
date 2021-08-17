@@ -9,8 +9,8 @@
             <router-link :to="el.path">
               <span :class="'icon iconfont ' + el.icon"></span>
               {{ el.describer }}
-              <i class="aside-new" v-if="el.new">NEW!</i>
-              <i class="aside-offline" v-if="el.offline">
+              <i class="aside-new" v-if="el.newtag == 1">NEW!</i>
+              <i class="aside-offline" v-if="el.offline == 1">
                 <span class="span-offline">OFFLINE</span>
               </i>
             </router-link>
@@ -22,14 +22,34 @@
 </template>
 
 <script>
-import { defaultMenu } from "@/config/defaultMenu";
+import { mapActions } from "vuex";
 export default {
+  props: ["changeRoleType"],
   data() {
     return {
-      defaultMenu,
+      defaultMenu: [],
     };
   },
-  created() {},
+  methods: {
+    ...mapActions(["queryUserMenu"]),
+  },
+  created() {
+    let that = this;
+    this.queryUserMenu({
+      callback: (data) => {
+        const { msg, code } = data.content.result;
+        if (code == "00000") {
+          that.defaultMenu = msg;
+        } else {
+          that.$notify.error({
+            title: `错误 [${code}]`,
+            message: msg,
+            showClose: false,
+          });
+        }
+      },
+    });
+  },
 };
 </script>
 

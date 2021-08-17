@@ -1,12 +1,13 @@
 module.exports = {
   devServer: {
-    port: 5500,
-  },
-  chainWebpack: config => {
-    config.plugin('html')
-      .tap((args) => {
-        args[0].title = 'husk'
-        return args
-      })
-  }
+      proxy: {
+        '/api': {
+          target: 'http://localhost:7070/',
+          changeOrigin: true,
+          pathRewrite:{
+            '^/api' : ''
+          }
+        },
+      }
+    },
 };

@@ -22,6 +22,14 @@ export default [ {
         isLogin: true
       }
     },{
+      path: 'research',
+      name: 'research',
+      component: () => import('../views/Home/Order/Research'),
+      meta: {
+        title: `调研 ${title}`,
+        isLogin: true
+      }
+    },{
       path: 'mybusiness',
       name: 'mybusiness',
       component: () => import('../views/Home/Overview/MyBusiness'),
@@ -99,14 +107,6 @@ export default [ {
       component: () => import('../views/Home/Services/Manual'),
       meta: {
         title:  `使用手册 ${title}`,
-        isLogin: true
-      }
-    },{
-      path: 'micchart',
-      name: 'micchart',
-      component: () => import('../views/Home/Overview/Micchart'),
-      meta: {
-        title:  `微聊 ${title}`,
         isLogin: true
       }
     },{
@@ -208,14 +208,6 @@ export default [ {
       path: 'orderVolume',
       name: 'orderVolume',
       component: () => import('../views/Home/System/OrderVolume'),
-      meta: {
-        title:  `工单交易量 ${title}`,
-        isLogin: true
-      }
-    },{
-      path: 'onlineUsers',
-      name: 'onlineUsers',
-      component: () => import('../views/Home/System/OnlineUsers'),
       meta: {
         title:  `工单交易量 ${title}`,
         isLogin: true

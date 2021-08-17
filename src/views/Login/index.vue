@@ -6,62 +6,66 @@
           <img src="@/assets/bpms_logo.png" alt="" />
           花生金库
         </div>
-        <ul class="navbar">
+        <!-- <ul class="navbar">
           <li>账号金库</li>
           <li>权限金库</li>
           <li>审计中心</li>
           <li>申请记录</li>
           <li>日志流水</li>
           <li>管理入口</li>
-        </ul>
+        </ul> -->
       </div>
     </div>
-    <div class="contents">
-      <div class="login-context">
-        <div class="describer">
-          <div class="target">
-            <img src="@/assets/bpms_logo.png" alt="" />
-            花生金库
-            <i class="iconfont icon-guanbi1"></i>
-            <img src="../../assets/logo.png" alt="" />
-            坚果分析
+    <div class="user-login">
+      <div class="contents">
+        <h1>
+          安全登录门户
+          <i class="el-icon-loading el-icon" ></i>
+        </h1>
+        <div class="login-context">
+          <el-form
+            :model="ruleForm"
+            status-icon
+            :rules="rules"
+            ref="ruleForm"
+            class="demo-ruleForm"
+          >
+            <div class="form-title">用户名：</div>
+            <el-form-item prop="username">
+              <el-input
+                type="text"
+                v-model="ruleForm.username"
+                autocomplete="off"
+                placeholder="请输入用户名"
+              ></el-input>
+            </el-form-item>
+            <div class="form-title">密码：</div>
+            <el-form-item prop="password">
+              <el-input
+                type="password"
+                v-model="ruleForm.password"
+                autocomplete="off"
+                placeholder="请输入密码"
+              ></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="submitForm('ruleForm')"
+                >立即登录</el-button
+              >
+            </el-form-item>
+          </el-form>
+          <div class="describer">
+            <span class="el-icon-chat-line-round el-icon"></span>
+            <span class="describer-font">暂未开启自助注册渠道，一期灰度测试测试用户请联系管理员，进行账户注册。感谢支持！</span>
           </div>
-          <div class="options"></div>
         </div>
-
-        <el-form
-          :model="ruleForm"
-          status-icon
-          :rules="rules"
-          ref="ruleForm"
-          class="demo-ruleForm"
-        >
-          <el-form-item prop="username">
-            <el-input
-              type="text"
-              v-model="ruleForm.username"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input
-              type="password"
-              v-model="ruleForm.password"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')"
-              >立即登录</el-button
-            >
-          </el-form-item>
-        </el-form>
       </div>
     </div>
   </div>
 </template>
 
-// <script>
+<script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -74,7 +78,8 @@ export default {
           { required: true, message: "请输入用户名！", trigger: "blur" },
           {
             required: true,
-            pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+            pattern:
+              /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
             message: "用户名不正确，请输入邮箱！",
             trigger: "blur",
           },
@@ -86,19 +91,50 @@ export default {
     };
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate(() => {
-        this.$router.history.push("/overview/city");
-        // if (valid) {
-        //   alert("submit!");
-        // } else {
-        //   console.log("error submit!!");
-        //   return false;
-        // }
-      });
-    },
+    ...mapActions(["login"]),
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          let that = this;
+          this.login({
+            username: this.ruleForm.username,
+            password: this.ruleForm.password,
+            callback(data) {
+              let { status, message, token, author, username, cnname } =
+                data.content.result;
+              if (status == "00000") {
+                localStorage.setItem(
+                  "users",
+                  JSON.stringify({
+                    date: new Date(),
+                    token,
+                    author,
+                    username,
+                    cnname,
+                  })
+                );
+                // 将数据存在vuex中,然后取拉取该用户的菜单权限，可以单独配置菜单
+                that.$router.push({ path: "/overview/research" });
+              } else {
+                that.$notify.error({
+                  title: `错误 [${status}]`,
+                   message,
+                  showClose: false,
+                });
+              }
+            },
+          });
+        } else {
+          this.$notify.error({
+            title: "错误 [20324]",
+            message: "用户信息校验未通过，请重新输入信息",
+            showClose: false,
+          });
+        }
+      });
     },
   },
 };
@@ -126,6 +162,8 @@ export default {
   line-height: 80px;
   height: 80px;
   box-shadow: 0 0 12px -7px #bdc3c7;
+  background: #fff;
+  z-index: 999;
 }
 
 .header .brand {
@@ -155,20 +193,27 @@ export default {
   overflow: hidden;
 }
 
-.contents {
-  display: flex;
-  justify-content: center;
-  padding-top: 240px;
+.user-login {
+  position: relative;
   height: 100%;
-  background: #fcfcfc;
+  background: #fdfdfd;
+}
+
+.contents {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .login-context {
-  padding: 20px;
-  width: 360px;
-  height: 500px;
+  padding: 30px 30px;
+  height: 420px;
+  width: 380px;
   background: #fff;
   box-shadow: 0 0 12px -7px #bdc3c7;
+  border-radius: 4px;
+  margin-bottom: 10%;
 }
 
 .login-brand {
@@ -177,7 +222,7 @@ export default {
 }
 
 /deep/.el-form-item {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 /deep/.el-form-item__label {
@@ -202,5 +247,22 @@ export default {
   font-size: 24px;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+.el-icon {
+  font-size: 20px;
+  margin-right: 6px;
+  color: #409EFF;
+}
+
+.describer-font {
+  font-size: 14px;
+  color: #aaa;
+}
+.form-title {
+  display: inline-block;
+  padding: 4px 0;
+  font-size: 16px;
+  color: #777;
 }
 </style>

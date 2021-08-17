@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeRouter from './HomeRouter'
 import LoginRouter from './LoginRouter'
+import dayjs from 'dayjs'
 
 
 Vue.use(VueRouter)
@@ -38,10 +39,9 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
   if (to?.meta?.isLogin) {
     if (to?.meta?.author) {
-      next();
-      // let { token, date, author } = JSON.parse(localStorage.getItem('users')) || '';
-      // let dateCheck = dayjs(date).isBefore(dayjs(new Date()))
-      // token && dateCheck && to?.meta?.author.includes(author) ? next() : next({ path: "/login" })
+      let { token, date, author } = JSON.parse(localStorage.getItem('users')) || '';
+      let dateCheck = dayjs(date).isBefore(dayjs(new Date()))
+      token && dateCheck && to?.meta?.author.includes(author) ? next() : next({ path: "/login" })
     } else {
       next();
     }
@@ -49,5 +49,13 @@ router.beforeEach((to, from, next) => {
     next();
   }
 })
+
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
+
 
 export default router

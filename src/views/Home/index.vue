@@ -1,10 +1,18 @@
 <template>
   <el-container class="container">
+    <div
+      class="data-safty"
+      v-if="roleTypeTips"
+      title="点击关闭提示信息"
+      @click="closeDataSafty"
+    >
+      超级管理员用户请注意，任何数据查询和变更提交，都会留下日志信息！
+    </div>
     <el-header class="header">
       <Header />
     </el-header>
 
-    <Notice :text="notice" :color="color" :icon="icon"/>
+    <Notice :text="notice" :color="color" :icon="icon" />
 
     <el-container class="content">
       <el-aside width="300px" class="aside">
@@ -19,20 +27,34 @@
 </template>
 
 <script>
+// 进入的一瞬间开始请求导航栏
 import Header from "../Header";
 import Aside from "../Aside";
-import Notice from '../../components/Notice'
+import Notice from "../../components/Notice";
 export default {
   data() {
     return {
-      notice:"因数据库宕机，导致业务无法订购成功，正在紧急恢复中！",
-      color:"#1890ff"
+      notice: "因数据库宕机，导致业务无法订购成功，正在紧急恢复中！",
+      color: "#1890ff",
+      roleTypeTips: "",
     };
+  },
+  methods: {
+    changeRoleType() {
+      const type = JSON.parse(localStorage.getItem("users")).author;
+      if (type === "admin") this.roleTypeTips = true;
+    },
+    closeDataSafty() {
+      this.roleTypeTips = false;
+    },
   },
   components: {
     Header,
     Aside,
-    Notice
+    Notice,
+  },
+  mounted() {
+    this.changeRoleType();
   },
 };
 </script>
@@ -64,5 +86,14 @@ export default {
 .van-notice-bar__wrap,
 .van-notice-bar {
   height: 28px !important;
+}
+
+.data-safty {
+  cursor: pointer;
+  display: inline-block;
+  padding: 4px 0;
+  color: #1890ff;
+  background: rgb(236, 249, 255);
+  text-align: center;
 }
 </style>
