@@ -2,7 +2,7 @@
   <div class="research-container">
     <h2 class="research-header">
       <span class="iconfont icon-iframetianjia"></span>
-      我的调研
+      <div class="research-header-title">我的调研</div>
     </h2>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="调研列表" name="first">
@@ -73,6 +73,7 @@ export default {
         })
         .catch(() => {});
     },
+    handleClick() {},
   },
   components: {
     ResearchList,
@@ -110,14 +111,19 @@ export default {
 
 .research-add {
   position: absolute;
-  top: 46px;
+  top: 60px;
   right: 0;
   cursor: pointer;
   color: #1890ff;
 }
 
+.research-header-title {
+  margin: 6px 6px;
+  display: inline-block;
+  font-size: 22px;
+}
+
 .research-font {
   padding-left: 4px;
 }
-
 </style>

@@ -6,6 +6,12 @@ import router from '../router'
 // 配置loading动画
 import { Loading } from 'element-ui'
 
+// 创建axios实例
+const service = axios.create({
+    baseURL: 'http://49.234.235.135:8080', // 本地-前端解决跨域
+    timeout: 15000 // 请求超时时间
+});
+
 let loading
 function startLoading() {
     loading = Loading.service({
@@ -16,17 +22,15 @@ function startLoading() {
     })
 }
 
-function endLoading() {
-    loading.close()
-}
+const endLoading = () => loading.close()
 
 let needLoadingRequestCount = 0
-const showFullScreenLoading = function () {
+const showFullScreenLoading = () => {
     if (needLoadingRequestCount === 0) startLoading();
     needLoadingRequestCount++
 }
 
-const tryHideFullScreenLoading = function () {
+const tryHideFullScreenLoading = () => {
     if (needLoadingRequestCount <= 0) return
     needLoadingRequestCount--
     if (needLoadingRequestCount === 0) endLoading();
@@ -34,7 +38,7 @@ const tryHideFullScreenLoading = function () {
 
 
 // 配置全局的拦截器
-axios.interceptors.request.use(config => {
+service.interceptors.request.use(config => {
     // 如果配置了isLoading: false，则不显示loading
     if (config.headers.isLoading !== false) showFullScreenLoading();
     if (localStorage.getItem('users')) {
@@ -51,21 +55,34 @@ axios.interceptors.request.use(config => {
 
 
 //响应头拦截
-axios.interceptors.response.use(response => {
+service.interceptors.response.use(response => {
     tryHideFullScreenLoading()
     return response.data;
 }, error => {
     //当返回信息为未登录或者登录失效的时候重定向为登录页面
-    if (error.response.status == '401') {
-        Message.error({ message: error.response.data.msg })
-        localStorage.clear()
-        router.push({
-            path: '/login',
-            query: { redirect: router.currentRoute.fullPath } //从哪个页面跳转
-        })
+    const { status = '400' } = error?.response
+    switch (status) {
+        case 400:
+            Message.error({ message: "参数信息有误", center: true });
+            break;
+        case 302:
+            Message.error({ message: "用户未登录", center: true });
+            router.push("/login");
+            break;
+        case 404:
+            Message.error({ message: "连接失败", center: true });
+            break;
+        case 500:
+            Message.error({ message: "服务器内部错误", center: true });
+            break;
+        case 560:
+            Message.error({ message: "数据库异常", center: true });
+            break;
+        default:
+            Message.error({ message: error.message, center: true, duration: 5 * 1000 });
+            break;
     }
-    tryHideFullScreenLoading()
     return Promise.reject(error)
 });
 
-export default axios;
+export default service;
