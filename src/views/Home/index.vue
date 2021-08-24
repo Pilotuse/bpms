@@ -38,6 +38,7 @@ export default {
       color: "#1890ff",
       roleTypeTips: "",
       icon: "",
+      menu:[]
     };
   },
   methods: {
@@ -93,8 +94,8 @@ export default {
   cursor: pointer;
   display: inline-block;
   padding: 4px 0;
-  color: #1890ff;
-  background: rgb(236, 249, 255);
+  color: #fff;
+  background: #1890ff;
   text-align: center;
 }
 </style>

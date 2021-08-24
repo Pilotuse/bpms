@@ -16,26 +16,28 @@
               content="点击前往查看联系人信息"
               placement="top"
             >
-              <span class="drawer-cursor drawer-color">jie.wang</span>
+              <span class="drawer-cursor drawer-color">{{
+                ruleForm.belong
+              }}</span>
             </el-tooltip>
           </el-form-item>
         </el-col>
         <el-col :span="10">
           <el-form-item label="案例编码" class="drawer-color"
-            >{{ Date.now() }}001
+            >{{ ruleForm.caseID }}
           </el-form-item>
         </el-col>
       </el-row>
 
       <el-row :gutter="20">
         <el-col :span="10">
-          <el-form-item label="创建日期" class="drawer-color">{{
-            Date.now()
-          }}</el-form-item>
+          <el-form-item label="创建日期" class="drawer-color">
+            {{ ruleForm.createDate }}</el-form-item
+          >
         </el-col>
         <el-col :span="10">
           <el-form-item label="创建方式" class="drawer-color">
-            定时触发
+            {{ ruleForm.trigger }}
           </el-form-item>
         </el-col>
       </el-row>
@@ -47,6 +49,7 @@
           placeholder="请输入调研标题"
         ></el-input>
       </el-form-item>
+
       <el-form-item label="责任部门" prop="department">
         <el-input
           v-model="ruleForm.department"
@@ -54,34 +57,44 @@
           class="drawer-width"
         ></el-input>
       </el-form-item>
+
       <el-form-item label="业务线" prop="serviceLine">
         <el-select
           v-model="ruleForm.serviceLine"
-          multiple
           filterable
-          allow-create
           default-first-option
-           class="drawer-width"
+          class="drawer-width"
+          clearable
           placeholder="请选择业务线"
         >
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+          <el-option
+            :label="item.prodname"
+            :value="item.prodid"
+            v-for="item in prodList"
+            :key="item.prodid"
+          ></el-option>
         </el-select>
+        <Toptips
+          content="如无业务线，请前往新增业务线信息，无权限请联系管理级新增"
+          placement="top"
+          icon="icon-jinggao"
+          class="drawer-toltips"
+        />
       </el-form-item>
+
       <el-form-item label="调研分类" prop="classify">
         <el-select
           v-model="ruleForm.classify"
-          multiple
           filterable
           allow-create
           placeholder="请选择调研分类"
           class="drawer-width"
         >
           <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            v-for="item in classifyList"
+            :key="item.submenu_id"
+            :label="item.submenu_desc"
+            :value="item.submenu_id"
           >
           </el-option>
         </el-select>
@@ -98,29 +111,27 @@
           placeholder="请选择调研地市"
           class="drawer-width"
           multiple
-        >
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
-        </el-select>
-      </el-form-item>
-
-      <el-form-item label="采集内容" prop="content">
-        <el-select
-          v-model="ruleForm.content"
-          placeholder="请选择采集内容"
-          class="drawer-width"
-          multiple
           filterable
-          allow-create
+          @change="handleCitys"
         >
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+          <el-option
+            :label="item.submenu_desc"
+            :value="item.submenu_id"
+            v-for="item in cityList"
+            :key="item.submenu_id"
+          >
+            <span style="float: left">{{ item.submenu_desc }}</span>
+            <span
+              style="
+                float: right;
+                color: #aaa;
+                font-size: 13px;
+                margin-right: 20px;
+              "
+              >{{ item.submenu_id }}</span
+            >
+          </el-option>
         </el-select>
-        <Toptips
-          content="采集内容支持在线创建"
-          placement="top"
-          class="drawer-toltips"
-        />
       </el-form-item>
 
       <el-form-item label="资源附件" prop="adjunct">
@@ -130,14 +141,34 @@
           class="drawer-width"
           multiple
         >
-          <el-option label="图片" value="picture"></el-option>
-          <el-option label="文件" value="file"></el-option>
+          <el-option
+            :label="item.submenu_desc"
+            :value="item.submenu_id"
+            v-for="item in adjunctList"
+            :key="item.submenu_id"
+          >
+            <span style="float: left">{{ item.submenu_desc }}</span>
+            <span
+              style="
+                float: right;
+                color: #aaa;
+                font-size: 13px;
+                margin-right: 20px;
+              "
+              >{{ item.submenu }}</span
+            >
+          </el-option>
         </el-select>
         <Toptips
-          content="图片支持JPG、PNG等格式，文件建议使用ZIP压缩包"
+          content="是否允许地市上传文件，单个上传数据不得大于5M，图片、文档提供在线预览"
           placement="top"
+          icon="icon-gaojingkongxin"
           class="drawer-toltips"
         />
+      </el-form-item>
+
+      <el-form-item label="参与考核">
+        <el-switch v-model="ruleForm.delivery"></el-switch>
       </el-form-item>
 
       <el-form-item label="起止时间" required>
@@ -149,13 +180,28 @@
               range-separator="至"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
+              :picker-options="pickerOptions"
             >
             </el-date-picker>
           </el-form-item>
         </el-col>
       </el-form-item>
 
-      <el-form-item label="信息备注" prop="desc">
+      <el-form-item label="下发文件">
+        <el-upload
+          drag
+          multiple
+          :on-change="handleFiles"
+          :auto-upload="false"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :data={}
+        >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        </el-upload>
+      </el-form-item>
+
+      <el-form-item label="调研描述" prop="desc">
         <el-input
           type="textarea"
           v-model="ruleForm.desc"
@@ -173,21 +219,30 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Toptips from "@/components/Toptips";
+import dayjs from "dayjs";
 export default {
   data() {
     return {
+      cityList: [],
+      adjunctList: [],
+      classifyList: [],
+      prodList: [],
       ruleForm: {
+        belong: "",
+        caseID: "",
+        createDate: "",
+        trigger: "手动触发",
         title: "",
         department: "",
-        serviceLine: "阿斯顿撒",
+        serviceLine: "",
         classify: "",
         region: "",
-        content: "",
         adjunct: "",
+        delivery: true,
         startStopTime: "",
-        type: [],
-        resource: "",
+        fileList: [],
         desc: "",
       },
       rules: {
@@ -215,42 +270,35 @@ export default {
           },
         ],
         classify: [
-          {
-            required: true,
-            message: "请选择调研分类",
-            trigger: "change",
-          },
+          { required: true, message: "请选择调研分类", trigger: "change" },
         ],
-        region: [
-          {
-            required: true,
-            message: "请选择地市",
-            trigger: "change",
-          },
-        ],
-        content: [
-          {
-            required: true,
-            message: "请选择采集内容",
-            trigger: "change",
-          },
-        ],
+        region: [{ required: true, message: "请选择地市", trigger: "change" }],
         startStopTime: [
-          {
-            required: true,
-            message: "请选择地市",
-            trigger: "change",
-          },
+          { required: true, message: "其选择起止时间", trigger: "change" },
         ],
-        desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
+        desc: [{ required: true, message: "请填写发布文案", trigger: "blur" }],
+      },
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() < Date.now() - 8.64e7;
+        },
       },
     };
   },
   methods: {
+    ...mapActions([
+      "queryCitysOptions",
+      "queryAttachOptions",
+      "queryClassifyOptions",
+      "queryProdInfos",
+      "insertRearchCase",
+    ]),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          this.insertRearchCase({ ...this.ruleForm, callback: (data) => {
+            console.log(data);
+          } });
         } else {
           console.log("error submit!!");
           return false;
@@ -260,9 +308,81 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
+    handleCitys(value) {
+      if (value.length == 1) {
+        this.ruleForm.region = value;
+        return;
+      }
+      if (value.some((el) => el === "000") && value[0] !== "000") {
+        this.ruleForm.region = ["000"];
+        return;
+      }
+      this.ruleForm.region = value.filter((el) => el !== "000");
+    },
+    handleFiles(file, fileList) {
+      this.ruleForm.fileList = fileList;
+    },
   },
   components: {
     Toptips,
+  },
+  mounted() {
+    const that = this;
+    // 请求下拉各项选项的数据
+    this.queryCitysOptions({
+      callback: ({
+        content: {
+          result: { msg },
+        },
+      }) => {
+        that.cityList = msg;
+      },
+    });
+
+    this.queryAttachOptions({
+      callback: ({
+        content: {
+          result: { msg },
+        },
+      }) => {
+        console.log(msg);
+        that.adjunctList = msg;
+      },
+    });
+
+    this.queryClassifyOptions({
+      callback: ({
+        content: {
+          result: { msg },
+        },
+      }) => {
+        console.log(msg);
+        that.classifyList = msg;
+      },
+    });
+
+    this.queryProdInfos({
+      callback: ({
+        content: {
+          result: { msg },
+        },
+      }) => {
+        console.log(msg);
+        that.prodList = msg;
+      },
+    });
+  },
+  created() {
+    try {
+      this.ruleForm.caseID = `${Date.now()}001`;
+      this.ruleForm.createDate = `${dayjs().format("YYYY-MM-DD HH:mm:ss")}`;
+      this.ruleForm.belong = JSON.parse(localStorage.getItem("users")).cnname;
+    } catch (error) {
+      this.$notify.error({
+        title: "错误",
+        message: error,
+      });
+    }
   },
 };
 </script>
@@ -293,5 +413,13 @@ export default {
 
 .drawer-toltips {
   margin-left: 20px;
+}
+
+.drawer-container .el-upload-dragger {
+  width: 400px;
+}
+
+.drawer-container .el-upload-list__item.is-ready {
+  width: 400px;
 }
 </style>

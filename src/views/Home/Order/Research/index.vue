@@ -23,7 +23,7 @@
       :visible.sync="drawer"
       :direction="direction"
       :before-close="handleClose"
-      :show-close="false"
+      :wrapperClosable="false"
     >
       <ResearchCreate />
     </el-drawer>
@@ -80,6 +80,7 @@ export default {
     ResearchSettings,
     ResearchCreate,
   },
+
 };
 </script>
 

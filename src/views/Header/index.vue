@@ -87,18 +87,13 @@ export default {
         case "logout":
           localStorage.removeItem("users");
           this.$router.push({ path: "/" });
-          this.notify({
-            type: "success",
-            title: "交易成功",
-            message: "用户已成功退出登录",
-          });
+          this.$message.success({ message: "用户已成功退出登录" });
           break;
         default:
           break;
       }
     },
   },
-  created() {},
   mounted() {
     try {
       const { cnname, author } = JSON.parse(localStorage.getItem("users"));

@@ -8,8 +8,9 @@ import { Loading } from 'element-ui'
 
 // 创建axios实例
 const service = axios.create({
-    baseURL: 'http://49.234.235.135:8080', // 本地-前端解决跨域
-    timeout: 15000 // 请求超时时间
+    // baseURL: 'http://49.234.235.135:8080', // 本地-前端解决跨域
+    baseURL: 'http://localhost:6060', // 本地-前端解决跨域
+    timeout: 10000 // 请求超时时间
 });
 
 let loading
@@ -59,6 +60,7 @@ service.interceptors.response.use(response => {
     tryHideFullScreenLoading()
     return response.data;
 }, error => {
+    tryHideFullScreenLoading()
     //当返回信息为未登录或者登录失效的时候重定向为登录页面
     const { status = '400' } = error?.response
     switch (status) {

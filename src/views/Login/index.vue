@@ -20,7 +20,7 @@
       <div class="contents">
         <h1>
           安全登录门户
-          <i class="el-icon-loading el-icon" ></i>
+          <i class="el-icon-loading el-icon"></i>
         </h1>
         <div class="login-context">
           <el-form
@@ -56,7 +56,9 @@
           </el-form>
           <div class="describer">
             <span class="el-icon-chat-line-round el-icon"></span>
-            <span class="describer-font">暂未开启自助注册渠道，一期灰度测试测试用户请联系管理员，进行账户注册。感谢支持！</span>
+            <span class="describer-font"
+              >暂未开启自助注册渠道，一期灰度测试测试用户请联系管理员，进行账户注册。感谢支持！</span
+            >
           </div>
         </div>
       </div>
@@ -72,6 +74,7 @@ export default {
       ruleForm: {
         username: "",
         password: "",
+        defaultMenu: "",
       },
       rules: {
         username: [
@@ -91,7 +94,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions(["login", "queryUserMenu"]),
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
@@ -121,7 +124,7 @@ export default {
               } else {
                 that.$notify.error({
                   title: `错误 [${status}]`,
-                   message,
+                  message,
                   showClose: false,
                 });
               }
@@ -136,6 +139,27 @@ export default {
         }
       });
     },
+    queryUserMenuFn() {
+      let that = this;
+      this.queryUserMenu({
+        callback: (data) => {
+          const { msg, code } = data.content.result;
+          if (code == "00000") {
+            sessionStorage.setItem('menu',JSON.stringify(msg))
+            that.$router.push({ path: "/overview/research" });
+            that.$message.success("自动登录成功!");
+          }
+        },
+      });
+    },
+  },
+  created() {
+    try {
+      let token = JSON.parse(localStorage.getItem("users")).token;
+      if (token) this.queryUserMenuFn();
+    } catch (error) {
+      console.log();
+    }
   },
 };
 </script>
@@ -252,7 +276,7 @@ export default {
 .el-icon {
   font-size: 20px;
   margin-right: 6px;
-  color: #409EFF;
+  color: #409eff;
 }
 
 .describer-font {

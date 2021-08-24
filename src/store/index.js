@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import service from '../service'
 
 Vue.use(Vuex)
-import usersController from '../service/usersController'
-import setupController from '../service/setupController'
 
-const service = { ...usersController, ...setupController }
 
 export default new Vuex.Store({
   state: {
@@ -25,8 +23,21 @@ export default new Vuex.Store({
     },
     queryUserMenu(context, info) {
       service.queryUserMenu(info).then(res => info.callback(res))
-    }
+    },
+    queryCitysOptions(context, info) {
+      service.queryCitysOptions(info).then(res => info.callback(res))
+    },
+    queryAttachOptions(context, info) {
+      service.queryAttachOptions(info).then(res => info.callback(res))
+    },
+    queryClassifyOptions(context, info) {
+      service.queryClassifyOptions(info).then(res => info.callback(res))
+    },
+    queryProdInfos(context, info) {
+      service.queryProdInfos(info).then(res => info.callback(res))
+    },
+    insertRearchCase(context, info) {
+      service.insertRearchCase(info).then(res => info.callback(res))
+    },
   },
-  modules: {
-  }
 })

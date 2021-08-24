@@ -34,21 +34,27 @@ export default {
     ...mapActions(["queryUserMenu"]),
   },
   created() {
-    let that = this;
-    this.queryUserMenu({
-      callback: (data) => {
-        const { msg, code } = data.content.result;
-        if (code == "00000") {
-          that.defaultMenu = msg;
-        } else {
-          that.$notify.error({
-            title: `错误 [${code}]`,
-            message: msg,
-            showClose: false,
-          });
-        }
-      },
-    });
+    // 如果没有menu的数据则调用接口查询
+    try {
+      this.defaultMenu = JSON.parse(sessionStorage.getItem("menu"));
+    } catch (error) {
+      let that = this;
+      this.queryUserMenu({
+        callback: (data) => {
+          const { msg, code } = data.content.result;
+          if (code == "00000") {
+            that.defaultMenu = msg;
+            sessionStorage.setItem('menu',JSON.stringify(msg))
+          } else {
+            that.$notify.error({
+              title: `错误 [${code}]`,
+              message: msg,
+              showClose: false,
+            });
+          }
+        },
+      });
+    }
   },
 };
 </script>
