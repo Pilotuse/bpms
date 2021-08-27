@@ -86,6 +86,7 @@ export default {
       switch (command) {
         case "logout":
           localStorage.removeItem("users");
+          sessionStorage.removeItem('menu')
           this.$router.push({ path: "/" });
           this.$message.success({ message: "用户已成功退出登录" });
           break;

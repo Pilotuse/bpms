@@ -8,16 +8,17 @@
       <el-tab-pane label="调研列表" name="first">
         <ResearchList />
       </el-tab-pane>
-      <el-tab-pane label="调研设置" name="second">
+      <el-tab-pane label="调研设置" name="second" v-if="roletype">
         <ResearchSettings />
       </el-tab-pane>
     </el-tabs>
-    <div class="research-add" @click="drawer = true">
-      <span class="iconfont icon-zidingyi"></span>
+    <div class="research-add" @click="drawer = true"  v-if="roletype">
+      <span class="iconfont icon-bianjisekuai"></span>
       <span class="research-font">调研发布</span>
     </div>
 
     <el-drawer
+     
       title="创建调研任务"
       size="700px"
       :visible.sync="drawer"
@@ -41,28 +42,7 @@ export default {
       drawer: false,
       direction: "rtl",
       activeName: "first",
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-        },
-      ],
+      roletype: "",
     };
   },
   methods: {
@@ -80,7 +60,11 @@ export default {
     ResearchSettings,
     ResearchCreate,
   },
-
+  created() {
+    this.roletype = ["manager", "admin"].some(
+      (el) => el == JSON.parse(localStorage.getItem("users")).author
+    );
+  },
 };
 </script>
 

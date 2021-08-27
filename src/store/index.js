@@ -39,5 +39,8 @@ export default new Vuex.Store({
     insertRearchCase(context, info) {
       service.insertRearchCase(info).then(res => info.callback(res))
     },
+    queryRearchCase(context, info) {
+      service.queryRearchCase(info).then(res => info.callback(res))
+    },
   },
 })

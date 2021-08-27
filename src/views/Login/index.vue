@@ -106,7 +106,7 @@ export default {
             username: this.ruleForm.username,
             password: this.ruleForm.password,
             callback(data) {
-              let { status, message, token, author, username, cnname } =
+              let { status, msg, token, author, username, cnname } =
                 data.content.result;
               if (status == "00000") {
                 localStorage.setItem(
@@ -124,7 +124,7 @@ export default {
               } else {
                 that.$notify.error({
                   title: `错误 [${status}]`,
-                  message,
+                  message: msg,
                   showClose: false,
                 });
               }
@@ -145,7 +145,7 @@ export default {
         callback: (data) => {
           const { msg, code } = data.content.result;
           if (code == "00000") {
-            sessionStorage.setItem('menu',JSON.stringify(msg))
+            sessionStorage.setItem("menu", JSON.stringify(msg));
             that.$router.push({ path: "/overview/research" });
             that.$message.success("自动登录成功!");
           }

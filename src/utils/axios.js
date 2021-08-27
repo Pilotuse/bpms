@@ -67,6 +67,9 @@ service.interceptors.response.use(response => {
         case 400:
             Message.error({ message: "参数信息有误", center: true });
             break;
+        case 401:
+            Message.error({ message: "用户登录令牌过期，请重新登录", center: true });
+            break;
         case 302:
             Message.error({ message: "用户未登录", center: true });
             router.push("/login");

@@ -194,11 +194,44 @@
           :on-change="handleFiles"
           :auto-upload="false"
           action="https://jsonplaceholder.typicode.com/posts/"
-          :data={}
+          :data="{}"
         >
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         </el-upload>
+      </el-form-item>
+
+      <el-form-item label="调研审批" prop="adjunct">
+        <el-select
+          v-model="ruleForm.adjunct"
+          placeholder="请选择审批人"
+          class="drawer-width"
+          multiple
+        >
+          <el-option
+            :label="item.submenu_desc"
+            :value="item.submenu_id"
+            v-for="item in adjunctList"
+            :key="item.submenu_id"
+          >
+            <span style="float: left">{{ item.submenu_desc }}</span>
+            <span
+              style="
+                float: right;
+                color: #aaa;
+                font-size: 13px;
+                margin-right: 20px;
+              "
+              >{{ item.submenu }}</span
+            >
+          </el-option>
+        </el-select>
+        <Toptips
+          content="可选择多人进行审批，1票通过"
+          placement="top"
+          icon="icon-gaojingkongxin"
+          class="drawer-toltips"
+        />
       </el-form-item>
 
       <el-form-item label="调研描述" prop="desc">
@@ -296,9 +329,12 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.insertRearchCase({ ...this.ruleForm, callback: (data) => {
-            console.log(data);
-          } });
+          this.insertRearchCase({
+            ...this.ruleForm,
+            callback: (data) => {
+              console.log(data);
+            },
+          });
         } else {
           console.log("error submit!!");
           return false;

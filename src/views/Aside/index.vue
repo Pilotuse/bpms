@@ -36,7 +36,12 @@ export default {
   created() {
     // 如果没有menu的数据则调用接口查询
     try {
-      this.defaultMenu = JSON.parse(sessionStorage.getItem("menu"));
+      const defaultMenu = JSON.parse(sessionStorage.getItem("menu"));
+      if (defaultMenu.length) {
+        this.defaultMenu = defaultMenu;
+      } else {
+        throw Error("数据获取失败");
+      }
     } catch (error) {
       let that = this;
       this.queryUserMenu({
@@ -44,7 +49,7 @@ export default {
           const { msg, code } = data.content.result;
           if (code == "00000") {
             that.defaultMenu = msg;
-            sessionStorage.setItem('menu',JSON.stringify(msg))
+            sessionStorage.setItem("menu", JSON.stringify(msg));
           } else {
             that.$notify.error({
               title: `错误 [${code}]`,
