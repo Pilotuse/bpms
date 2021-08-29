@@ -8,7 +8,7 @@ import { Loading } from 'element-ui'
 
 // 创建axios实例
 const service = axios.create({
-    // baseURL: 'http://49.234.235.135:8080', // 本地-前端解决跨域
+    // baseURL: 'http://49.234.235.135:6060', // 本地-前端解决跨域
     baseURL: 'http://localhost:6060', // 本地-前端解决跨域
     timeout: 10000 // 请求超时时间
 });
@@ -66,9 +66,11 @@ service.interceptors.response.use(response => {
     switch (status) {
         case 400:
             Message.error({ message: "参数信息有误", center: true });
+            router.push("/login");
             break;
         case 401:
             Message.error({ message: "用户登录令牌过期，请重新登录", center: true });
+            router.push("/login");
             break;
         case 302:
             Message.error({ message: "用户未登录", center: true });

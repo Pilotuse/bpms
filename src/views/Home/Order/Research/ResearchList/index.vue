@@ -1,19 +1,30 @@
   <template>
-  <div>
+  <div class="research-list">
     <el-empty
       description="暂无调研数据"
       v-if="tableData.length === 0"
     ></el-empty>
     <el-table :data="tableData" style="width: 100%" v-if="tableData.length > 0">
-      <el-table-column prop="case_id" label="调研ID" width="180">
+      <el-table-column label="调研ID" width="200">
+        <template slot-scope="scope">
+          <Runcase :status="scope.row.status" />
+          {{ scope.row.case_id }}
+        </template>
       </el-table-column>
 
       <el-table-column label="调研标题">
         <template slot-scope="scope">
-          <el-tag type="success" size="mini" title="我创建的调研案例">
-            <i class="iconfont icon-zhinengxiaofangshuan"></i>
-          </el-tag>
+          <i class="el-icon-connection" style="color:#67c23a"></i>
           <span style="margin-left: 10px">{{ scope.row.research_title }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column prop="belong" label="发布人" width="200">
+      </el-table-column>
+
+      <el-table-column label="完成率" width="200">
+        <template>
+          <el-progress :percentage="50"></el-progress>
         </template>
       </el-table-column>
 
@@ -23,43 +34,42 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="生效时间">
+      <el-table-column label="生效时间" width="200">
         <template slot-scope="scope">
-          <Runcase :status="scope.row.status" />
           <span style="margin-left: 10px">{{
             scope.row.effect_date | filterDt
           }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column prop="describer" label="调研备注"> </el-table-column>
-
       <el-table-column prop="address" label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
             >查看</el-button
           >
-          <el-button
-            v-if="scope.row.status !== 2"
-            size="mini"
-            :disabled="scope.row.status | orderChangeStop"
-            @click="handleEdit(scope.$index, scope.row)"
-            >暂停</el-button
-          >
-          <el-button
-            size="mini"
-            v-if="scope.row.status === 2"
-            :disabled="scope.row.status | orderChangeStop"
-            @click="handleEdit(scope.$index, scope.row)"
-            >恢复</el-button
-          >
-          <el-button
-            size="mini"
-            type="danger"
-            :disabled="scope.row.status | orderDelete"
-            @click="handleDelete(scope.$index, scope.row)"
-            >删除</el-button
-          >
+          <span style="margin-left: 10px" v-if="isRole">
+            <el-button
+              v-if="scope.row.status !== 2"
+              size="mini"
+              :disabled="scope.row.status | orderChangeStop"
+              @click="handleEdit(scope.$index, scope.row)"
+              >暂停</el-button
+            >
+            <el-button
+              size="mini"
+              v-if="scope.row.status === 2"
+              :disabled="scope.row.status | orderChangeStop"
+              @click="handleEdit(scope.$index, scope.row)"
+              >恢复</el-button
+            >
+            <el-button
+              size="mini"
+              type="danger"
+              :disabled="scope.row.status | orderDelete"
+              @click="handleDelete(scope.$index, scope.row)"
+              >删除</el-button
+            >
+          </span>
         </template>
       </el-table-column>
     </el-table>
@@ -75,6 +85,7 @@ export default {
   data() {
     return {
       tableData: [],
+      isRole: false,
     };
   },
   methods: {
@@ -97,10 +108,12 @@ export default {
       return [4].some((el) => el == value);
     },
     formatCtiy(value) {
-      return value
-        .split(".")
-        .map((el) => citys.filter((city) => city.code == el)[0].name)
-        .join("，");
+      return value != "000"
+        ? value
+            .split(".")
+            .map((el) => citys.filter((city) => city.code == el)[0].name)
+            .join("，")
+        : citys.map((el) => el.name).join("，");
     },
   },
   mounted() {
@@ -110,6 +123,14 @@ export default {
         that.tableData = data.content.result;
       },
     });
+  },
+  created() {
+    try {
+      let roletype = JSON.parse(localStorage.getItem("users")).author;
+      this.isRole = ["manager", "admin"].some((el) => el == roletype);
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>
