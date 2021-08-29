@@ -187,7 +187,7 @@
         </el-col>
       </el-form-item>
 
-      <el-form-item label="下发文件">
+      <!-- <el-form-item label="下发文件">
         <el-upload
           drag
           multiple
@@ -199,33 +199,26 @@
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         </el-upload>
-      </el-form-item>
+      </el-form-item> -->
 
-      <el-form-item label="调研审批" prop="adjunct">
+      <el-form-item label="调研审批" prop="approveUser">
         <el-select
-          v-model="ruleForm.adjunct"
-          placeholder="请选择审批人"
+          v-model="ruleForm.approveUser"
+          filterable
+          default-first-option
           class="drawer-width"
+          clearable
           multiple
+          placeholder="请选择审批人"
         >
           <el-option
-            :label="item.submenu_desc"
-            :value="item.submenu_id"
-            v-for="item in adjunctList"
-            :key="item.submenu_id"
-          >
-            <span style="float: left">{{ item.submenu_desc }}</span>
-            <span
-              style="
-                float: right;
-                color: #aaa;
-                font-size: 13px;
-                margin-right: 20px;
-              "
-              >{{ item.submenu }}</span
-            >
-          </el-option>
+            :label="item"
+            :value="item"
+            v-for="item in approve"
+            :key="item"
+          ></el-option>
         </el-select>
+
         <Toptips
           content="可选择多人进行审批，1票通过"
           placement="top"
@@ -241,6 +234,7 @@
           class="drawer-width"
         ></el-input>
       </el-form-item>
+
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">
           发布任务
@@ -262,6 +256,7 @@ export default {
       adjunctList: [],
       classifyList: [],
       prodList: [],
+      approve: [],
       ruleForm: {
         belong: "",
         caseID: "",
@@ -277,6 +272,7 @@ export default {
         startStopTime: "",
         fileList: [],
         desc: "",
+        approveUser: "",
       },
       rules: {
         title: [
@@ -298,7 +294,7 @@ export default {
         serviceLine: [
           {
             required: true,
-            message: "请选择业务线，支持选择多条",
+            message: "请选择，支持选择多条",
             trigger: "change",
           },
         ],
@@ -307,7 +303,10 @@ export default {
         ],
         region: [{ required: true, message: "请选择地市", trigger: "change" }],
         startStopTime: [
-          { required: true, message: "其选择起止时间", trigger: "change" },
+          { required: true, message: "请选择起止时间", trigger: "change" },
+        ],
+        approveUser:[
+          { required: true, message: "请选择审批人", trigger: "change" },
         ],
         desc: [{ required: true, message: "请填写发布文案", trigger: "blur" }],
       },
@@ -325,6 +324,7 @@ export default {
       "queryClassifyOptions",
       "queryProdInfos",
       "insertRearchCase",
+      "queryUserType",
     ]),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -381,7 +381,6 @@ export default {
           result: { msg },
         },
       }) => {
-        console.log(msg);
         that.adjunctList = msg;
       },
     });
@@ -392,7 +391,6 @@ export default {
           result: { msg },
         },
       }) => {
-        console.log(msg);
         that.classifyList = msg;
       },
     });
@@ -403,8 +401,18 @@ export default {
           result: { msg },
         },
       }) => {
-        console.log(msg);
         that.prodList = msg;
+      },
+    });
+
+    this.queryUserType({
+      userinfos: ["leader"],
+      callback: ({
+        content: {
+          result: { msg },
+        },
+      }) => {
+        that.approve = msg.split("|");
       },
     });
   },

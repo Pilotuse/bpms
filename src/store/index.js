@@ -10,12 +10,16 @@ export default new Vuex.Store({
     apitest: {
       url: '',
       params: {
-
-      }
-    }
+      },
+    },
+    changeStatus: false,
+    caseid: ''
   },
   mutations: {
-
+    changeScreenfull(state, payload) {
+      state.changeStatus = payload.changeStatus
+      state.caseid = payload.caseid
+    }
   },
   actions: {
     login(context, info) {
@@ -41,6 +45,9 @@ export default new Vuex.Store({
     },
     queryRearchCase(context, info) {
       service.queryRearchCase(info).then(res => info.callback(res))
+    },
+    queryUserType(context, info) {
+      service.queryUserType(info).then(res => info.callback(res))
     },
   },
 })

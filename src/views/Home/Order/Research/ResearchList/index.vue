@@ -14,7 +14,7 @@
 
       <el-table-column label="调研标题">
         <template slot-scope="scope">
-          <i class="el-icon-connection" style="color:#67c23a"></i>
+          <i class="el-icon-connection" style="color: #67c23a"></i>
           <span style="margin-left: 10px">{{ scope.row.research_title }}</span>
         </template>
       </el-table-column>
@@ -22,7 +22,7 @@
       <el-table-column prop="belong" label="发布人" width="200">
       </el-table-column>
 
-      <el-table-column label="完成率" width="200">
+      <el-table-column label="状态" width="200">
         <template>
           <el-progress :percentage="50"></el-progress>
         </template>
@@ -44,9 +44,9 @@
 
       <el-table-column prop="address" label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-            >查看</el-button
-          >
+          <el-button size="mini" @click="handleWatch(scope.row)">
+            查看
+          </el-button>
           <span style="margin-left: 10px" v-if="isRole">
             <el-button
               v-if="scope.row.status !== 2"
@@ -79,7 +79,7 @@
 <script>
 import dayjs from "dayjs";
 import { citys } from "@/interface";
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import Runcase from "@/components/Runcase";
 export default {
   data() {
@@ -90,6 +90,10 @@ export default {
   },
   methods: {
     ...mapActions(["queryRearchCase"]),
+    ...mapMutations(["changeScreenfull"]),
+    handleWatch(scope) {
+      this.changeScreenfull({ changeStatus: true, caseid: scope.case_id });
+    },
   },
   components: {
     Runcase,
