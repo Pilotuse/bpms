@@ -5,11 +5,7 @@
       v-if="tableData.length === 0"
     ></el-empty>
     <el-table :data="tableData" style="width: 100%" v-if="tableData.length > 0">
-      <el-table-column label="调研ID" width="200">
-        <template slot-scope="scope">
-          <Runcase :status="scope.row.status" />
-          {{ scope.row.case_id }}
-        </template>
+      <el-table-column label="调研ID" prop="case_id">
       </el-table-column>
 
       <el-table-column label="调研标题">
@@ -19,23 +15,12 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="belong" label="发布人" width="200">
+      <el-table-column prop="belong" label="发布人">
       </el-table-column>
 
-      <el-table-column label="状态" width="200">
-        <template>
-          <el-progress :percentage="50"></el-progress>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="涉及地市">
+      <el-table-column label="生效时间">
         <template slot-scope="scope">
-          {{ scope.row.region | formatCtiy }}
-        </template>
-      </el-table-column>
-
-      <el-table-column label="生效时间" width="200">
-        <template slot-scope="scope">
+          <Runcase :status="scope.row.status" />
           <span style="margin-left: 10px">{{
             scope.row.effect_date | filterDt
           }}</span>
@@ -100,7 +85,7 @@ export default {
   },
   filters: {
     filterDt(value) {
-      return dayjs(value).format("YYYY-MM-DD HH:mm:ss");
+      return dayjs(value).format("MM-DD HH:mm:ss");
     },
     orderOptions(value) {
       return value;

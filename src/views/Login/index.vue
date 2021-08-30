@@ -6,14 +6,12 @@
           <img src="@/assets/bpms_logo.png" alt="" />
           花生金库
         </div>
-        <!-- <ul class="navbar">
+        <ul class="navbar">
           <li>账号金库</li>
           <li>权限金库</li>
           <li>审计中心</li>
           <li>申请记录</li>
-          <li>日志流水</li>
-          <li>管理入口</li>
-        </ul> -->
+        </ul>
       </div>
     </div>
     <div class="user-login">
@@ -224,6 +222,7 @@ export default {
 }
 
 .contents {
+  margin-top: 20px;
   position: absolute;
   top: 38%;
   left: 50%;

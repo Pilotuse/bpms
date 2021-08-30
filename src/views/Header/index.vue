@@ -14,10 +14,10 @@
     <div class="user-info">
       <!-- 只用一般用户才有发布功能，省属直 没有此按钮 事件如果是地市则直接进入事件列表，省属直则直接进入处理列表 -->
       <ul>
-        <!-- <li v-for="item in headerMenu" :key="item.id">
+        <li v-for="item in headerMenu" :key="item.id">
           <span :class="'iconfont ' + item.icon"></span>
           {{ item.describer }}
-        </li> -->
+        </li>
         <li>
           <el-dropdown @command="handleCommand" trigger="click">
             <span class="el-dropdown-link">
@@ -26,18 +26,18 @@
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <!-- <el-dropdown-item>
+              <el-dropdown-item>
                 <span class="iconfont icon-icon_zhanghao"></span>
                 个人中心
-              </el-dropdown-item> -->
-              <!-- <el-dropdown-item>
+              </el-dropdown-item>
+              <el-dropdown-item>
                 <span class="iconfont icon-shoucang"></span>
                 我的收藏
-              </el-dropdown-item> -->
-              <!-- <el-dropdown-item>
+              </el-dropdown-item>
+              <el-dropdown-item>
                 <span class="iconfont icon-kefu"></span>
                 智慧客服
-              </el-dropdown-item> -->
+              </el-dropdown-item>
               <el-dropdown-item command="logout">
                 <span class="iconfont icon-chatou"></span>
                 退出登录
@@ -160,6 +160,11 @@ export default {
   user-select: none;
   font-size: 14px;
   color: #777;
+  line-height: 62px;
+}
+
+.user-info .el-dropdown-menu {
+  padding: 0 !important;
 }
 
 .user-info li span {

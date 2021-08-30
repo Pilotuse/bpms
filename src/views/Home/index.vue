@@ -1,6 +1,6 @@
 <template>
   <el-container class="container">
-    <transition  name="slide-fade">
+    <transition name="slide-fade">
       <Screenfull content="调研详情">
         <ResesarchCase />
       </Screenfull>
@@ -18,10 +18,10 @@
       <Header />
     </el-header>
 
-    <Notice :text="notice" :color="color" :icon="icon" />
+    <Notice :text="notice" />
 
     <el-container class="content">
-      <el-aside width="300px" class="aside">
+      <el-aside width="16%" style="max-width: 300px" class="aside">
         <Aside />
       </el-aside>
       <el-main>

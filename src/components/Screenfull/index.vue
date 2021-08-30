@@ -3,7 +3,8 @@
     <div class="screenfull-header">
       <el-page-header @back="goback">
         <template slot="content">
-          {{content}}&emsp;<el-tag type="success" size="small">案例号：{{caseid}}</el-tag>
+          {{content}}&nbsp;
+          <el-tag type="success" size="small">案例号：{{caseid}}</el-tag>
         </template>
       </el-page-header>
     </div>
