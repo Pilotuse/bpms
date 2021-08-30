@@ -1,12 +1,12 @@
 <template>
   <div class="research-case-container">
     <div class="join-citys">
-      <span>地市选择</span>
+      <span class="research-title">地市选择</span>
       <span
         v-for="(item, index) in cityParty"
         :key="index"
         :class="[
-          `${item.name === currentCtiy.name ? 'research-citys-onselect' : ''}`,
+          `${item.name === currentCtiy[0].name ? 'research-citys-onselect' : ''}`,
           'research-citys',
         ]"
         ref="span"
@@ -14,8 +14,11 @@
         >{{ item.name }}</span
       >
     </div>
-    <div class="research-description">
-      <span>调研详情</span>
+    <div class="research-description join-citys">
+      <span class="research-title">调研详情</span>
+      <div class="research-description-item">
+
+      </div>
     </div>
   </div>
 </template>
@@ -41,7 +44,7 @@ export default {
         { code: 712, name: "孝感", Abbreviation: "" },
         { code: 999, name: "湖北", Abbreviation: "" },
       ],
-      currentCtiy: "",
+      currentCtiy: [],
     };
   },
   methods: {
@@ -54,7 +57,7 @@ export default {
     },
   },
   mounted() {
-    this.currentCtiy = this.cityParty[0];
+    this.currentCtiy = [this.cityParty[0]];
     console.dir(this.currentCtiy);
   },
 };
@@ -91,6 +94,17 @@ export default {
 .research-citys-onselect {
   border: 1px solid #409eff;
   font-weight: 700;
+}
+
+.research-title {
+  font-weight: 700;
+}
+
+.research-description-item {
+  margin-top: 10px;
+  width: 99%;
+  height: 600px;
+  box-shadow: 0 0  12px -6px #ccc;
 }
 </style>
 

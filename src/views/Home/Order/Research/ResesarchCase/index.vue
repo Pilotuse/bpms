@@ -1,5 +1,5 @@
 <template>
-  <el-tabs :tab-position="tabPosition" style="height: 200px">
+  <el-tabs :tab-position="tabPosition">
     <el-tab-pane label="调研大盘"> </el-tab-pane>
     <el-tab-pane label="调研查看">
       <ResearchWatch />
