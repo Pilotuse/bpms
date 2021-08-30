@@ -2,14 +2,21 @@
   <div class="research-case-container">
     <div class="join-citys">
       <span>地市选择</span>
-      <span v-for="(item, index) in cityParty" :key="index">{{
-        item.name
-      }}</span>
+      <span
+        v-for="(item, index) in cityParty"
+        :key="index"
+        :class="[
+          `${item.name === currentCtiy.name ? 'research-citys-onselect' : ''}`,
+          'research-citys',
+        ]"
+        ref="span"
+        @click="handleSelect"
+        >{{ item.name }}</span
+      >
     </div>
     <div class="research-description">
-        <span>调研详情</span>
+      <span>调研详情</span>
     </div>
-  
   </div>
 </template>
 
@@ -28,13 +35,27 @@ export default {
         { code: 717, name: "宜昌", Abbreviation: "" },
         { code: 719, name: "十堰", Abbreviation: "" },
         { code: 710, name: "襄阳", Abbreviation: "" },
+        { code: 716, name: "荆州", Abbreviation: "" },
+        { code: 724, name: "荆门", Abbreviation: "" },
+        { code: 713, name: "黄冈", Abbreviation: "" },
+        { code: 712, name: "孝感", Abbreviation: "" },
+        { code: 999, name: "湖北", Abbreviation: "" },
       ],
+      currentCtiy: "",
     };
   },
   methods: {
-    tag(e) {
-      console.log(e.target);
+    handleSelect(e) {
+      this.$refs.span.forEach((el) => (el.className = "research-citys"));
+      e.target.className = "research-citys research-citys-onselect";
+      this.currentCtiy = this.cityParty.filter(
+        (el) => el.name == e.target.innerText
+      );
     },
+  },
+  mounted() {
+    this.currentCtiy = this.cityParty[0];
+    console.dir(this.currentCtiy);
   },
 };
 </script>
@@ -44,25 +65,32 @@ export default {
 .research-case-container {
   padding-left: 10px;
 }
+
+.join-citys {
+  margin-bottom: 20px;
+}
+
 .join-citys > span {
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
-h3 {
-  position: relative;
-  padding-left: 20px;
-  font-size: 22px;
+.research-citys {
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  background: rgb(236, 249, 255);
+  color: #409eff;
+  opacity: 0.8;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #fff;
 }
 
-h3::after {
-  content: "☇";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 2px;
-  height: 100%;
-  color: #1890ff;
-  font-size: 20px;
+.research-citys-onselect {
+  border: 1px solid #409eff;
+  font-weight: 700;
 }
 </style>
 
