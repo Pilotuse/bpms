@@ -73,13 +73,14 @@ export default {
 
 
 <style>
+
 .el-main {
   padding: 0 26px 10px 26px !important;
 }
 .container {
   width: 100%;
   height: 100%;
-  min-width: 1200px;
+  min-width: 1300px !important;
 }
 
 .header {
