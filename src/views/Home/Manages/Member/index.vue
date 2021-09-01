@@ -23,7 +23,9 @@
         </div>
       </el-card>
     </div>
-    <h3>成员详情</h3>
+    <h3>
+      成员详情 <span>成员新增</span>
+    </h3>
 
     <div class="member-list">
       <div class="member-search">
@@ -154,6 +156,15 @@ h3::after {
   height: 100%;
   color: #1890ff;
   font-size: 20px;
+}
+
+h3 > span {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #1890ff;
+  cursor: pointer;
+  user-select: none;
+  float: right;
 }
 
 .member-analyze {
