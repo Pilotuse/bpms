@@ -6,7 +6,9 @@
         v-for="(item, index) in cityParty"
         :key="index"
         :class="[
-          `${item.name === currentCtiy[0].name ? 'research-citys-onselect' : ''}`,
+          `${
+            item.name === currentCtiy[0].name ? 'research-citys-onselect' : ''
+          }`,
           'research-citys',
         ]"
         ref="span"
@@ -17,7 +19,48 @@
     <div class="research-description join-citys">
       <span class="research-title">调研详情</span>
       <div class="research-description-item">
-
+        <el-descriptions
+          class="margin-top"
+          :column="3"
+          :size="size"
+          border
+        >
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-user"></i>
+              调研地市
+            </template>
+            武汉
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-mobile-phone"></i>
+              手机号
+            </template>
+            18100000000
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-location-outline"></i>
+              居住地
+            </template>
+            苏州市
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-tickets"></i>
+              备注
+            </template>
+            <el-tag size="small">学校</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-office-building"></i>
+              联系地址
+            </template>
+            江苏省苏州市吴中区吴中大道 1188 号
+          </el-descriptions-item>
+        </el-descriptions>
       </div>
     </div>
   </div>
@@ -101,10 +144,11 @@ export default {
 }
 
 .research-description-item {
+  padding: 20px;
   margin-top: 10px;
   width: 99%;
   height: 600px;
-  box-shadow: 0 0  12px -6px #ccc;
+  box-shadow: 0 0 12px -6px #ccc;
 }
 </style>
 
