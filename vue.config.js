@@ -1,15 +1,15 @@
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 module.exports = {
   productionSourceMap: false,
   configureWebpack: config => {
-    config.plugins.push(new BundleAnalyzerPlugin({
-      analyzerMode: 'server',
-      generateStatsFile: true,
-      statsOptions: { source: false }
-    }));
+    // config.plugins.push(new BundleAnalyzerPlugin({
+    //   analyzerMode: 'server',
+    //   generateStatsFile: true,
+    //   statsOptions: { source: false }
+    // }));
     config.plugins.push(new CompressionWebpackPlugin({
       filename: info => {
         return `${info.path}.gz${info.query}`

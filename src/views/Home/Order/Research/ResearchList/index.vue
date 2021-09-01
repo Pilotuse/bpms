@@ -1,12 +1,15 @@
   <template>
-  <div class="research-list">
+  <div
+    class="research-list"
+    v-loading="loading"
+    element-loading-text="拼命加载中"
+  >
     <el-empty
       description="暂无调研数据"
       v-if="tableData.length === 0"
     ></el-empty>
     <el-table :data="tableData" style="width: 100%" v-if="tableData.length > 0">
-      <el-table-column label="调研ID" prop="case_id">
-      </el-table-column>
+      <el-table-column label="调研ID" prop="case_id"> </el-table-column>
 
       <el-table-column label="调研标题">
         <template slot-scope="scope">
@@ -15,8 +18,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="belong" label="发布人">
-      </el-table-column>
+      <el-table-column prop="belong" label="发布人"> </el-table-column>
 
       <el-table-column label="生效时间">
         <template slot-scope="scope">
@@ -71,6 +73,7 @@ export default {
     return {
       tableData: [],
       isRole: false,
+      loading: false,
     };
   },
   methods: {
@@ -107,8 +110,10 @@ export default {
   },
   mounted() {
     let that = this;
+    this.loading = true;
     this.queryRearchCase({
       callback: (data) => {
+        that.loading = false;
         that.tableData = data.content.result;
       },
     });

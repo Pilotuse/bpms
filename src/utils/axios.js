@@ -3,9 +3,6 @@ import { Message } from 'element-ui'
 import router from '../router'
 // 全局拦截器，这个文件不要动！！！！
 
-// 配置loading动画
-import { Loading } from 'element-ui'
-
 // 创建axios实例
 const service = axios.create({
     baseURL: 'http://49.234.235.135:6060', // 本地-前端解决跨域
@@ -13,42 +10,15 @@ const service = axios.create({
     timeout: 10000 // 请求超时时间
 });
 
-let loading
-function startLoading() {
-    loading = Loading.service({
-        lock: true,
-        text: '联络地球中...',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.2)'
-    })
-}
-
-const endLoading = () => loading.close()
-
-let needLoadingRequestCount = 0
-const showFullScreenLoading = () => {
-    if (needLoadingRequestCount === 0) startLoading();
-    needLoadingRequestCount++
-}
-
-const tryHideFullScreenLoading = () => {
-    if (needLoadingRequestCount <= 0) return
-    needLoadingRequestCount--
-    if (needLoadingRequestCount === 0) endLoading();
-}
-
-
 // 配置全局的拦截器
 service.interceptors.request.use(config => {
     // 如果配置了isLoading: false，则不显示loading
-    if (config.headers.isLoading !== false) showFullScreenLoading();
     if (localStorage.getItem('users')) {
         let token = JSON.parse(localStorage.getItem("users")).token
         config.headers.common["authorization"] = token
     }
     return config;
 }, error => {
-    tryHideFullScreenLoading()
     Message.error({ message: 'Oops 跟地球断网了！' })
     return Promise.reject(error)
 });
@@ -57,10 +27,8 @@ service.interceptors.request.use(config => {
 
 //响应头拦截
 service.interceptors.response.use(response => {
-    tryHideFullScreenLoading()
     return response.data;
 }, error => {
-    tryHideFullScreenLoading()
     //当返回信息为未登录或者登录失效的时候重定向为登录页面
     const { status = '400' } = error?.response
     switch (status) {

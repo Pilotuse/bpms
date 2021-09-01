@@ -1,5 +1,9 @@
 <template>
-  <div class="login-container">
+  <div
+    class="login-container"
+    v-loading="loading"
+    element-loading-text="登录中，请稍后..."
+  >
     <div class="header">
       <div class="header-context">
         <div class="brand">
@@ -69,6 +73,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      loading: false,
       ruleForm: {
         username: "",
         password: "",
@@ -100,12 +105,14 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let that = this;
+          this.loading = true;
           this.login({
             username: this.ruleForm.username,
             password: this.ruleForm.password,
             callback(data) {
               let { status, msg, token, author, username, cnname } =
                 data.content.result;
+              this.loading = false;
               if (status == "00000") {
                 localStorage.setItem(
                   "users",
