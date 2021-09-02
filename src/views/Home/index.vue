@@ -29,6 +29,7 @@
         <div id="subapp-viewport"></div>
       </el-main>
     </el-container>
+    <OptionsBall />
   </el-container>
 </template>
 
@@ -39,6 +40,7 @@ import Aside from "../Aside";
 import Notice from "../../components/Notice";
 import ResesarchCase from "./Order/Research/ResesarchCase";
 import Screenfull from "@/components/Screenfull";
+import OptionsBall from "@/components/OptionsBall";
 export default {
   data() {
     return {
@@ -64,6 +66,7 @@ export default {
     Notice,
     Screenfull,
     ResesarchCase,
+    OptionsBall,
   },
   mounted() {
     this.changeRoleType();
@@ -73,7 +76,6 @@ export default {
 
 
 <style>
-
 .el-main {
   padding: 0 26px 10px 26px !important;
 }

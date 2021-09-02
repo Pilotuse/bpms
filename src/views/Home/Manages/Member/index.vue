@@ -3,29 +3,50 @@
     <h3>成员状态</h3>
     <div class="member-analyze">
       <el-card class="box-card" shadow="hover">
-        <div v-for="o in 4" :key="o" class="text item">
-          {{ "列表内容 " + o }}
+        <div class="box-card-container">
+          <div>角色分析</div>
+          <div>管理员</div>
+          <div>地市管理员</div>
+          <div>地市用户</div>
+          <div>开发</div>
+          <div>测试</div>
+          <i class="iconfont icon-icon_zhanghao"></i>
         </div>
       </el-card>
       <el-card class="box-card" shadow="hover">
-        <div v-for="o in 4" :key="o" class="text item">
-          {{ "列表内容 " + o }}
+        <div class="box-card-container">
+          <div>状态分析</div>
+          <div>正常</div>
+          <div>待激活</div>
+          <div>暂停</div>
+          <div>注销</div>
+          <i class="iconfont icon-get"></i>
         </div>
       </el-card>
       <el-card class="box-card" shadow="hover">
-        <div v-for="o in 4" :key="o" class="text item">
-          {{ "列表内容 " + o }}
+        <div class="box-card-container">
+          <div>地市分析</div>
+          <div>武汉</div>
+          <div>江汉</div>
+          <div>宜昌</div>
+          <div>襄阳</div>
+          <div>其他</div>
+          <i class="iconfont icon-menci"></i>
         </div>
       </el-card>
       <el-card class="box-card" shadow="hover">
-        <div v-for="o in 4" :key="o" class="text item">
-          {{ "列表内容 " + o }}
+        <div class="box-card-container">
+          <div>用户业务线分析</div>
+          <div>企业视频彩铃</div>
+          <div>云Mas</div>
+          <div>转网专线</div>
+          <div>襄阳</div>
+          <div>其他</div>
+          <i class="iconfont icon-lianjieliu"></i>
         </div>
       </el-card>
     </div>
-    <h3>
-      成员详情 <span>成员新增</span>
-    </h3>
+    <h3>成员详情</h3>
 
     <div class="member-list">
       <div class="member-search">
@@ -36,7 +57,7 @@
               class="inline-input"
               v-model="state2"
               :fetch-suggestions="querySearch"
-              placeholder="请输入用户名或者用户id"
+              placeholder="输入用户名或者用户id"
               :trigger-on-focus="false"
               @select="handleSelect"
             ></el-autocomplete>
@@ -44,7 +65,7 @@
 
           <span class="member-search-item">
             角色：
-            <el-select v-model="value" placeholder="请选择">
+            <el-select v-model="value" placeholder="请选择角色">
               <el-option
                 v-for="item in cities"
                 :key="item.value"
@@ -61,7 +82,7 @@
 
           <span class="member-search-item">
             状态：
-            <el-select v-model="value" placeholder="请选择">
+            <el-select v-model="value" placeholder="请选择用户状态">
               <el-option
                 v-for="item in cities"
                 :key="item.value"
@@ -78,7 +99,7 @@
 
           <span class="member-search-item">
             地市：
-            <el-select v-model="value" placeholder="请选择">
+            <el-select v-model="value" placeholder="请选择所属地市">
               <el-option
                 v-for="item in cities"
                 :key="item.value"
@@ -95,7 +116,7 @@
 
           <span class="member-search-item">
             所属组：
-            <el-select v-model="value" placeholder="请选择">
+            <el-select v-model="value" placeholder="请选择所属组">
               <el-option
                 v-for="item in cities"
                 :key="item.value"
@@ -115,14 +136,18 @@
           </span>
         </el-card>
       </div>
+
       <div class="member-container">
         <el-table :data="tableData" border style="width: 100%">
-          <el-table-column fixed prop="date" label="日期"> </el-table-column>
+          <el-table-column fixed prop="date" label="用户名"> </el-table-column>
           <el-table-column prop="name" label="姓名"> </el-table-column>
-          <el-table-column prop="province" label="省份"> </el-table-column>
-          <el-table-column prop="city" label="市区"> </el-table-column>
-          <el-table-column prop="address" label="地址"> </el-table-column>
-          <el-table-column prop="zip" label="邮编"> </el-table-column>
+          <el-table-column prop="province" label="昵称"> </el-table-column>
+          <el-table-column prop="city" label="电话"> </el-table-column>
+          <el-table-column prop="address" label="地市"> </el-table-column>
+          <el-table-column prop="zip" label="所属组"> </el-table-column>
+          <el-table-column prop="address" label="角色"> </el-table-column>
+          <el-table-column prop="address" label="状态"> </el-table-column>
+          <el-table-column prop="address" label="注册时间"> </el-table-column>
           <el-table-column fixed="right" label="操作">
             <template slot-scope="scope">
               <el-button
@@ -183,6 +208,11 @@ h3 > span {
 
 .member-search {
   margin-bottom: 20px;
+  overflow-x: scroll;
+}
+
+.member-box-card {
+  width: 1500px;
 }
 
 .member-search > span {
@@ -200,5 +230,25 @@ h3 > span {
 .member-list .el-card__body {
   width: 1510px;
   overflow: hidden;
+}
+
+.member-analyze .el-card__body {
+  height: 100%;
+}
+
+.box-card-container {
+  position: relative;
+  height: 100%;
+}
+
+.box-card-container > i {
+  position: absolute;
+  bottom: -50px;
+  right: -20px;
+  font-size: 120px;
+  font-weight: 700;
+  color: #f9f9f9;
+  opacity: 0.5;
+  text-shadow: 0 2px 1px #eee;
 }
 </style>

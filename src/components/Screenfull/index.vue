@@ -12,7 +12,6 @@
     <div class="screenfull-body">
       <slot></slot>
     </div>
-    <div class="screenfull-footer"></div>
   </div>
 </template>
 
@@ -61,15 +60,7 @@ export default {
 .screenfull-body {
   overflow: scroll;
   padding: 16px;
-  height: calc(100% - 120px);
-}
-
-.screenfull-footer {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  height: 60px;
-  background: #f9f9f9;
+  height: calc(100% - 60px);
 }
 </style>
 
